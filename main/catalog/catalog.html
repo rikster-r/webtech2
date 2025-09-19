@@ -1,135 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Catalog - Egoisty</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            text-decoration: none;
-            box-sizing: border-box;
-        }
-
-        .header {
-            width: 100%;
-            height: 80px;
-            background-color: #F9FAFB;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .list {
-            display: flex;
-            gap: 20px;
-        }
-
-        .list li a {
-            color: #6B7280;
-            font-weight: 500;
-        }
-
-        .catalog {
-            max-width: 1200px;
-            margin: 40px auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .product {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.2s;
-        }
-
-        .product:hover {
-            transform: translateY(-5px);
-        }
-
-        .product img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .product h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
-            color: #111827;
-        }
-
-        .product p {
-            font-size: 14px;
-            color: #6B7280;
-            margin-bottom: 10px;
-        }
-
-        .product button {
-            padding: 8px 16px;
-            background-color: #2563EB;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .product button:hover {
-            background-color: #1D4ED8;
-        }
-
-    </style>
-</head>
-<body>
-<div class="header">
-    <div class="logo">
-        <img src="../../static/media/sticker.webp" width="50" height="50" alt="Logo">
-    </div>
-    <div class="nav">
+    <link rel="stylesheet" href="../global.css" />
+    <link rel="stylesheet" href="catalog.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img
+          src="../../static/media/sticker.webp"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </div>
+      <div class="nav">
         <ul class="list">
-            <li><a href="../../main/home/home.html">Home</a></li>
-            <li><a href="catalog.html">Catalog</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="../../authentication/login/login.html">Sign in</a></li>
-            <li><a href="../../authentication/register/register.html">Sign up</a></li>
+          <li><a href="../welcome/main.html">Home</a></li>
+          <li><a href="catalog.html">Catalog</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="../../authentication/login/login.html">Sign in</a></li>
+          <li>
+            <a href="../../authentication/register/register.html">Sign up</a>
+          </li>
         </ul>
-    </div>
-</div>
+      </div>
+    </header>
 
-<div class="catalog">
-    <div class="product">
-        <img src="../../static/media/product1.jpg" alt="Product 1">
+    <div class="catalog">
+      <a href="../product.html" class="product">
+        <img src="../../static/media/product1.jpg" alt="Product 1" />
         <h3>Product 1</h3>
         <p>$19.99</p>
         <button>Add to Cart</button>
-    </div>
-    <div class="product">
-        <img src="../../static/media/product2.jpg" alt="Product 2">
+      </a>
+      <a href="../product.html" class="product">
+        <img src="../../static/media/product2.jpg" alt="Product 2" />
         <h3>Product 2</h3>
         <p>$29.99</p>
         <button>Add to Cart</button>
-    </div>
-    <div class="product">
-        <img src="../../static/media/product3.jpg" alt="Product 3">
+      </a>
+      <a href="../product.html" class="product">
+        <img src="../../static/media/product3.jpg" alt="Product 3" />
         <h3>Product 3</h3>
         <p>$39.99</p>
         <button>Add to Cart</button>
-    </div>
-    <div class="product">
-        <img src="../../static/media/product4.jpg" alt="Product 4">
+      </a>
+      <a href="../product.html" class="product">
+        <img src="../../static/media/product4.jpg" alt="Product 4" />
         <h3>Product 4</h3>
         <p>$49.99</p>
         <button>Add to Cart</button>
+      </a>
     </div>
-</div>
-</body>
+  </body>
 </html>
