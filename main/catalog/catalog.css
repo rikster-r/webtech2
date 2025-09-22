@@ -51,3 +51,21 @@
 .product button:hover {
   background-color: #d90368;
 }
+
+.product-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem; /* размер эмодзи */
+  background-color: #f5f5f5; /* светлый фон */
+  width: 100%;
+  aspect-ratio: 1/1; /* квадрат */
+  border-radius: 16px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.product:hover .product-image {
+  transform: scale(1.05);
+}
