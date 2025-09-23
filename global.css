@@ -100,3 +100,15 @@ body {
   top: -5px;
   right: -5px;
 }
+
+/* Footer */
+.footer {
+  background-color: #f9fafb;
+  color: #6b7280;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto;
+  border-top: 1px solid #e5e7eb;
+  font-size: 14px;
+  font-weight: 500;
+}
