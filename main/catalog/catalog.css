@@ -1,9 +1,16 @@
 .catalog {
   max-width: 1200px;
   margin: 40px auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
+  justify-content: flex-start;
+}
+.catalog > * {
+  flex: 1 1 200px;
+  max-width: 300px;
+  min-width: 200px;
+  box-sizing: border-box;
 }
 
 .product {
@@ -64,8 +71,4 @@
   margin-bottom: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
-}
-
-.product:hover .product-image {
-  transform: scale(1.05);
 }

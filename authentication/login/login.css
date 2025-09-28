@@ -3,10 +3,14 @@ body {
   padding: 0;
   font-family: Arial, sans-serif;
   height: 100vh;
+  background: #f2f2f2;
+}
+
+.login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f2f2f2;
+  height: 100%;
 }
 
 .form-container {
@@ -15,7 +19,7 @@ body {
   border-radius: 10px;
   width: 300px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-container h2 {
@@ -33,7 +37,7 @@ body {
 .form-container button {
   width: 95%;
   padding: 10px;
-  background:  #D90368;
+  background: #d90368;
   border: none;
   border-radius: 5px;
   color: white;
@@ -41,10 +45,9 @@ body {
   margin-top: 10px;
 }
 
-
 .form-container a {
-  display: block;      
-  margin-top: 20px;    
+  display: block;
+  margin-top: 20px;
   color: black;
   text-decoration: none;
 }
