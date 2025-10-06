@@ -1,0 +1,84 @@
+/* Task 1: Responsive Typography */
+
+:root {
+    --font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    --text-color: #311324; /* deep rose (readable on light pink) */
+    --muted-color: #9d4d7a; /* muted rose */
+    --bg-color: #fff0f6; /* light pink */
+    --border-color: #ffc2e6; /* soft pink border */
+    --max-width: 70ch; /* comfortable measure for body text */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+}
+
+body {
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.site-header, .site-footer {
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.site-footer {
+    border-top: 1px solid var(--border-color);
+    border-bottom: none;
+}
+
+.content {
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: var(--max-width);
+}
+
+h1, h2, h3, p, ul {
+    margin: 0 0 1rem 0;
+}
+
+.subtitle {
+    color: var(--muted-color);
+}
+
+/* Mobile-first base sizes */
+h1 { font-size: 1.875rem; /* 30px */ }
+h2 { font-size: 1.5rem;   /* 24px */ }
+h3 { font-size: 1.25rem;  /* 20px */ }
+p, li { font-size: 1rem;  /* 16px */ }
+
+/* Tablet ≥600px */
+@media (min-width: 600px) {
+    h1 { font-size: 2.25rem; /* 36px */ }
+    h2 { font-size: 1.75rem; /* 28px */ }
+    h3 { font-size: 1.375rem; /* 22px */ }
+    p, li { font-size: 1.0625rem; /* 17px */ }
+}
+
+/* Large tablet / small desktop ≥900px */
+@media (min-width: 900px) {
+    h1 { font-size: 2.625rem; /* 42px */ }
+    h2 { font-size: 2rem;     /* 32px */ }
+    h3 { font-size: 1.5rem;   /* 24px */ }
+    p, li { font-size: 1.125rem; /* 18px */ }
+}
+
+/* Desktop ≥1200px */
+@media (min-width: 1200px) {
+    h1 { font-size: 3rem;   /* 48px */ }
+    h2 { font-size: 2.25rem;/* 36px */ }
+    h3 { font-size: 1.75rem;/* 28px */ }
+    p, li { font-size: 1.1875rem; /* 19px */ }
+}
+
+

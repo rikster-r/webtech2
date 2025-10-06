@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Responsive Cards (CSS)</title>
+    <link rel="stylesheet" href="cards.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <meta name="description" content="3 responsive cards layout: desktop 3-up, tablet 2-up, mobile stacked.">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Responsive Card Group</h1>
+        <p class="subtitle">Desktop: 3 in a row · Tablet: 2 · Mobile: stacked</p>
+    </header>
+
+    <main class="page">
+        <section class="cards" aria-label="Product cards">
+            <article class="card">
+                <img class="card-media" src="static/media/sea.jpg" alt="Sea landscape">
+                <div class="card-body">
+                    <h2 class="card-title">Coastal Escape</h2>
+                    <p class="card-text">Relax by the tranquil shoreline with crystal waters and soft sands.</p>
+                </div>
+                <footer class="card-footer">
+                    <button class="btn" type="button">View</button>
+                </footer>
+            </article>
+
+            <article class="card">
+                <img class="card-media" src="static/media/nature.jpg" alt="Forest nature">
+                <div class="card-body">
+                    <h2 class="card-title">Forest Retreat</h2>
+                    <p class="card-text">Immerse yourself in lush greenery and peaceful hiking trails.</p>
+                </div>
+                <footer class="card-footer">
+                    <button class="btn" type="button">View</button>
+                </footer>
+            </article>
+
+            <article class="card">
+                <img class="card-media" src="static/media/sky.jpg" alt="Sky view">
+                <div class="card-body">
+                    <h2 class="card-title">Sky Vista</h2>
+                    <p class="card-text">Open horizons and dramatic skyscapes for breathtaking moments.</p>
+                </div>
+                <footer class="card-footer">
+                    <button class="btn" type="button">View</button>
+                </footer>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <small>&copy; 2025 Card Demo</small>
+    </footer>
+</body>
+</html>
+

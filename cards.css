@@ -1,0 +1,97 @@
+/* Task 2: Card Group (CSS) — 3/2/1 responsive layout */
+
+:root {
+    --font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    --text: #311324;          /* deep rose text */
+    --muted: #9d4d7a;         /* muted rose */
+    --bg: #fff0f6;            /* light pink page bg */
+    --surface: #ffffff;       /* white card */
+    --border: #ffc2e6;        /* soft pink border */
+    --accent: #db2777;        /* rose-600 for buttons */
+    --accent-hover: #be185d;  /* rose-700 */
+    --shadow: 0 1px 2px rgba(219, 39, 119, 0.08), 0 4px 10px rgba(219, 39, 119, 0.06);
+    --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-family);
+}
+
+.site-header, .site-footer {
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.site-footer { border-top: 1px solid var(--border); border-bottom: none; }
+
+.subtitle { color: var(--muted); margin: 0.25rem 0 0; }
+
+.page { padding: 1rem; }
+
+/* Grid container */
+.cards {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Mobile: 1 column by default */
+.cards { grid-template-columns: 1fr; }
+
+/* Tablet ≥600px: 2 columns */
+@media (min-width: 600px) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Desktop ≥992px: 3 columns */
+@media (min-width: 992px) {
+    .cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Card styling */
+.card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.card-media {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-body { padding: 1rem; }
+.card-title { margin: 0 0 0.5rem; font-size: 1.125rem; }
+.card-text { margin: 0; color: var(--muted); }
+
+.card-footer {
+    padding: 0.75rem 1rem 1rem;
+    margin-top: auto;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.5rem 0.875rem;
+    border: 1px solid transparent;
+    background: var(--accent);
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out, transform 0.05s ease-in-out;
+}
+
+.btn:hover { background: var(--accent-hover); }
+.btn:active { transform: translateY(1px); }
+
+
