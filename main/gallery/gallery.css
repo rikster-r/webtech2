@@ -33,3 +33,51 @@
 .gallery-item:hover img {
   transform: scale(1.07);
 }
+
+/* Карусельные изображения */
+.carousel-img {
+  height: 500px; /* увеличиваем высоту для вертикального отображения */
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Основной стиль стрелок */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #d90368; /* красный цвет стрелок */
+  border-radius: 50%;         /* круглые стрелки */
+  filter: none;
+  width: 50px;
+  height: 50px;
+  background-size: 50% 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+
+
+/* Hover эффект */
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+  transform: scale(1.1);           /* слегка увеличиваем стрелку */
+  background-color: rgba(217,3,104,0.8); /* прозрачный красный фон при наведении */
+}
+
+
+/* Индикаторы */
+.carousel-indicators [data-bs-target] {
+  background-color: #d90368; /* цвет кружков */
+}
+
+.carousel-indicators .active {
+  background-color: #007bff; /* активный кружок */
+}
+
+/* Hover эффект для стрелок */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  filter: invert(1) drop-shadow(0 0 4px rgba(0,0,0,0.5));
+}
+
+
