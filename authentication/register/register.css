@@ -51,3 +51,9 @@ body {
   color: black;
   text-decoration: none;
 }
+
+
+  .form-container input, .form-container button {
+    width: 100%;
+  }
+}
