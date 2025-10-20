@@ -44,8 +44,12 @@
                     Password must be at least 6 characters.
                   </div>
                 </div>
-                <div class="d-grid mt-4">
+                <div class="d-grid gap-2 mt-4">
                   <button type="submit" class="btn btn-danger py-2">Login</button>
+                  
+                  <button type="button" id="resetBtn" class="btn btn-secondary py-2">
+                    Reset
+                  </button>
                 </div>
               </form>
               <div class="text-center mt-4">
@@ -92,6 +96,13 @@
         if (valid) {
           window.location.href = "../../main/welcome/main.html";
         }
+      });
+
+      document.getElementById("resetBtn").addEventListener("click", () => {
+        document.querySelectorAll("input").forEach(input => {
+          input.value = "";
+          input.classList.remove("is-invalid");
+        });
       });
     </script>
   </body>

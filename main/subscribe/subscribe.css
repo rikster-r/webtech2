@@ -77,3 +77,21 @@ button:hover {
 .back-btn:hover {
   color: #b10253;
 }
+
+.message {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
