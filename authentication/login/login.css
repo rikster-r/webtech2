@@ -1,64 +1,86 @@
 
+
+:root {
+  --accent: #e91e63;
+  --accent-dark: #d81b60;
+  --muted: #b0b0b0;
+  --card-bg: #ffffff;
+}
+
 body {
   background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 0;
-  min-height: 100vh;
 }
 
-.form-signin {
-  max-width: 400px;
-  padding: 15px;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(255, 182, 193, 0.4);
+.card {
+  border-radius: 14px;
+  background: var(--card-bg);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 260ms ease, box-shadow 260ms ease;
 }
 
-.form-signin h1 {
-  color: #e91e63;
-  font-weight: 600;
-  text-align: center;
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+.card h2 {
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .form-control {
-  border: 2px solid #f8bbd0;
+  border: 2px solid rgba(233, 30, 99, 0.12);
   border-radius: 10px;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .form-control:focus {
-  border-color: #e91e63;
-  box-shadow: 0 0 0 0.25rem rgba(233, 30, 99, 0.25);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.18rem rgba(233, 30, 99, 0.12);
+  outline: none;
 }
 
-.btn-primary {
-  background-color: #e91e63;
+.btn-danger {
+  background-color: var(--accent);
   border: none;
   border-radius: 10px;
   font-weight: 600;
-  transition: background-color 0.3s;
+  transition: background-color 220ms ease, transform 120ms ease;
 }
 
-.btn-primary:hover {
-  background-color: #d81b60;
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: var(--accent-dark);
 }
 
-.text-body-secondary {
-  color: #b0b0b0 !important;
-  text-align: center;
+.btn-secondary {
+  border-radius: 10px;
 }
 
-label {
-  color: #e91e63;
+.is-invalid {
+  animation: shake 360ms ease;
+  border-color: #ff6b81 !important;
 }
 
-.form-check-label {
-  color: #e91e63;
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 20px;
+.footer {
+  color: var(--muted);
+}
+
+.form-control:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid rgba(233,30,99,0.12);
+  outline-offset: 2px;
+}
+
+a.text-decoration-none:hover {
+  text-decoration: underline;
 }
   

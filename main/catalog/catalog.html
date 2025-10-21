@@ -211,26 +211,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const navLinks = document.querySelectorAll('header nav .nav-link');
-
-        navLinks.forEach((link, index) => {
-          link.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') {
-              e.preventDefault();
-              const next = navLinks[(index + 1) % navLinks.length];
-              next.focus();
-            } else if (e.key === 'ArrowLeft') {
-              e.preventDefault();
-              const prev =
-                navLinks[(index - 1 + navLinks.length) % navLinks.length];
-              prev.focus();
-            }
-          });
-        });
-      });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="catalog.js" defer></script>
   </body>
 </html>

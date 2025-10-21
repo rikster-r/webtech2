@@ -12,6 +12,7 @@
     />
 
     <link rel="stylesheet" href="../../global.css" />
+    <link rel="stylesheet" href="login.css" />
   </head>
   <body class="bg-light d-flex flex-column min-vh-100">
     <!-- Main Content - Centered Login Form -->
@@ -69,41 +70,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-      const form = document.getElementById("loginForm");
-      const username = document.getElementById("username");
-      const password = document.getElementById("password");
-
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        let valid = true;
-
-        if (username.value.trim() === "") {
-          username.classList.add("is-invalid");
-          valid = false;
-        } else {
-          username.classList.remove("is-invalid");
-        }
-
-        if (password.value.length < 6) {
-          password.classList.add("is-invalid");
-          valid = false;
-        } else {
-          password.classList.remove("is-invalid");
-        }
-
-        if (valid) {
-          window.location.href = "../../main/welcome/main.html";
-        }
-      });
-
-      document.getElementById("resetBtn").addEventListener("click", () => {
-        document.querySelectorAll("input").forEach(input => {
-          input.value = "";
-          input.classList.remove("is-invalid");
-        });
-      });
-    </script>
+    <script src="login.js" defer></script>
   </body>
 </html>

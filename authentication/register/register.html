@@ -12,12 +12,11 @@
     />
 
     <link rel="stylesheet" href="../../global.css" />
+    <link rel="stylesheet" href="register.css" />
   </head>
   <body class="bg-light d-flex flex-column min-vh-100">
-    <!-- Main Content -->
-    <main
-      class="flex-grow-1 d-flex align-items-center justify-content-center py-5"
-    >
+    <!-- Main Content - Centered Register Form (matches login) -->
+    <main class="flex-grow-1 d-flex align-items-center justify-content-center py-5">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-12 col-sm-8 col-md-6 col-lg-4">
@@ -27,57 +26,50 @@
                 <div class="mb-3">
                   <input
                     type="text"
-                    id="username"
                     class="form-control"
+                    id="username"
                     placeholder="Username"
+                    required
                   />
-                  <div class="text-danger small mt-1" id="usernameError"></div>
+                  <div class="invalid-feedback" id="usernameError"></div>
                 </div>
                 <div class="mb-3">
                   <input
                     type="email"
+                    class="form-control"
                     id="email"
-                    class="form-control"
                     placeholder="Email"
+                    required
                   />
-                  <div class="text-danger small mt-1" id="emailError"></div>
+                  <div class="invalid-feedback" id="emailError"></div>
                 </div>
                 <div class="mb-3">
                   <input
                     type="password"
+                    class="form-control"
                     id="password"
-                    class="form-control"
                     placeholder="Password"
+                    required
                   />
-                  <div class="text-danger small mt-1" id="passwordError"></div>
+                  <div class="invalid-feedback" id="passwordError"></div>
                 </div>
                 <div class="mb-3">
                   <input
                     type="password"
-                    id="confirmPassword"
                     class="form-control"
+                    id="confirmPassword"
                     placeholder="Confirm Password"
+                    required
                   />
-                  <div class="text-danger small mt-1" id="confirmError"></div>
+                  <div class="invalid-feedback" id="confirmError"></div>
                 </div>
                 <div class="d-grid gap-2 mt-4">
-                  <button type="submit" class="btn btn-danger py-2">
-                    Register
-                  </button>
-                  <button
-                    type="button"
-                    id="resetBtn"
-                    class="btn btn-secondary py-2"
-                  >
-                    Reset
-                  </button>
+                  <button type="submit" class="btn btn-danger py-2">Register</button>
+                  <button type="button" id="resetBtn" class="btn btn-secondary py-2">Reset</button>
                 </div>
               </form>
               <div class="text-center mt-4">
-                <a
-                  href="../login/login.html"
-                  class="text-decoration-none text-dark"
-                >
+                <a href="../login/login.html" class="text-decoration-none text-dark">
                   Already have an account?
                 </a>
               </div>
@@ -93,68 +85,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-      const form = document.getElementById('registerForm');
-
-      const username = document.getElementById('username');
-      const email = document.getElementById('email');
-      const password = document.getElementById('password');
-      const confirmPassword = document.getElementById('confirmPassword');
-
-      const usernameError = document.getElementById('usernameError');
-      const emailError = document.getElementById('emailError');
-      const passwordError = document.getElementById('passwordError');
-      const confirmError = document.getElementById('confirmError');
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        usernameError.textContent = '';
-        emailError.textContent = '';
-        passwordError.textContent = '';
-        confirmError.textContent = '';
-
-        let isValid = true;
-
-        if (username.value.trim() === '') {
-          usernameError.textContent = 'Username is required';
-          isValid = false;
-        }
-
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (email.value.trim() === '') {
-          emailError.textContent = 'Email is required';
-          isValid = false;
-        } else if (!emailPattern.test(email.value.trim())) {
-          emailError.textContent = 'Invalid email format';
-          isValid = false;
-        }
-
-        if (password.value.length < 6) {
-          passwordError.textContent = 'Password must be at least 6 characters';
-          isValid = false;
-        }
-
-        if (confirmPassword.value !== password.value) {
-          confirmError.textContent = 'Passwords do not match';
-          isValid = false;
-        }
-
-        if (isValid) {
-          alert('Form submitted successfully!');
-
-          window.location.href = '../login/login.html';
-          form.reset();
-        }
-      });
-
-      document.getElementById('resetBtn').addEventListener('click', () => {
-        document.querySelectorAll('input').forEach((input) => {
-          input.value = '';
-          input.classList.remove('is-invalid');
-        });
-      });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="register.js" defer></script>
   </body>
 </html>
