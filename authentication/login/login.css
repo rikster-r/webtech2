@@ -83,4 +83,79 @@ body {
 a.text-decoration-none:hover {
   text-decoration: underline;
 }
+
+/* Dark Theme Styles for Login */
+html.dark-theme body,
+body.dark-theme {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+html.dark-theme .card,
+body.dark-theme .card {
+  background: #3a3a3a;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+html.dark-theme .form-control,
+body.dark-theme .form-control {
+  background: #2d2d2d;
+  color: #e0e0e0;
+  border: 2px solid #555;
+}
+
+html.dark-theme .form-control:focus,
+body.dark-theme .form-control:focus {
+  border-color: var(--accent);
+  background: #2d2d2d;
+  color: #e0e0e0;
+}
+
+html.dark-theme .text-dark,
+body.dark-theme .text-dark {
+  color: #e0e0e0 !important;
+}
+
+html.dark-theme .bg-body-tertiary,
+body.dark-theme .bg-body-tertiary {
+  background-color: #2d2d2d !important;
+  color: #e0e0e0;
+}
+
+/* Theme Toggle Button Styles */
+.theme-toggle-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+#global-theme-toggle {
+  background: transparent;
+  border: 2px solid #6c757d;
+  color: #6c757d;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+#global-theme-toggle:hover {
+  background: #6c757d;
+  color: white;
+  transform: scale(1.05);
+}
+
+html.dark-theme #global-theme-toggle,
+body.dark-theme #global-theme-toggle {
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+html.dark-theme #global-theme-toggle:hover,
+body.dark-theme #global-theme-toggle:hover {
+  background: #555;
+  color: white;
+}
   

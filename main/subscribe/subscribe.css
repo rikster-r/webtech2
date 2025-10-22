@@ -95,3 +95,89 @@ button:hover {
   background-color: #f8d7da;
   color: #721c24;
 }
+
+/* Dark Theme Styles for Subscribe */
+html.dark-theme body,
+body.dark-theme {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+html.dark-theme .form-container,
+body.dark-theme .form-container {
+  background: #3a3a3a;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+html.dark-theme h2,
+body.dark-theme h2 {
+  color: #e0e0e0;
+}
+
+html.dark-theme p,
+body.dark-theme p {
+  color: #aaa;
+}
+
+html.dark-theme input,
+html.dark-theme textarea,
+body.dark-theme input,
+body.dark-theme textarea {
+  background: #2d2d2d;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+html.dark-theme input:focus,
+html.dark-theme textarea:focus,
+body.dark-theme input:focus,
+body.dark-theme textarea:focus {
+  border-color: #d90368;
+}
+
+html.dark-theme .back-btn,
+body.dark-theme .back-btn {
+  color: #ff8dbb;
+}
+
+html.dark-theme .back-btn:hover,
+body.dark-theme .back-btn:hover {
+  color: #d90368;
+}
+
+/* Theme Toggle Button Styles */
+.theme-toggle-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+#global-theme-toggle {
+  background: transparent;
+  border: 2px solid #6c757d;
+  color: #6c757d;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+#global-theme-toggle:hover {
+  background: #6c757d;
+  color: white;
+  transform: scale(1.05);
+}
+
+html.dark-theme #global-theme-toggle,
+body.dark-theme #global-theme-toggle {
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+html.dark-theme #global-theme-toggle:hover,
+body.dark-theme #global-theme-toggle:hover {
+  background: #555;
+  color: white;
+}

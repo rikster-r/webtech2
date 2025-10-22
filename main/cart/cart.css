@@ -346,3 +346,117 @@
     padding: 20px;
   }
 }
+
+/* Dark Theme Styles for Cart */
+html.dark-theme body,
+body.dark-theme {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+html.dark-theme .header,
+body.dark-theme .header {
+  background: #2d2d2d;
+  color: #e0e0e0;
+}
+
+html.dark-theme .nav-link,
+body.dark-theme .nav-link {
+  color: #e0e0e0 !important;
+}
+
+html.dark-theme .nav-link:hover,
+body.dark-theme .nav-link:hover {
+  color: #ff8dbb !important;
+}
+
+html.dark-theme .text-dark,
+body.dark-theme .text-dark {
+  color: #e0e0e0 !important;
+}
+
+html.dark-theme .bg-white,
+body.dark-theme .bg-white {
+  background-color: #2d2d2d !important;
+  color: #e0e0e0;
+}
+
+html.dark-theme .bg-light,
+body.dark-theme .bg-light {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0;
+}
+
+html.dark-theme .cart-items,
+html.dark-theme .cart-summary,
+html.dark-theme .empty-cart,
+body.dark-theme .cart-items,
+body.dark-theme .cart-summary,
+body.dark-theme .empty-cart {
+  background: #3a3a3a;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+html.dark-theme .cart-header h1,
+html.dark-theme .summary-header,
+html.dark-theme .item-name,
+html.dark-theme .summary-label,
+html.dark-theme .summary-value,
+body.dark-theme .cart-header h1,
+body.dark-theme .summary-header,
+body.dark-theme .item-name,
+body.dark-theme .summary-label,
+body.dark-theme .summary-value {
+  color: #e0e0e0;
+}
+
+html.dark-theme .item-variant,
+html.dark-theme .breadcrumb a,
+body.dark-theme .item-variant,
+body.dark-theme .breadcrumb a {
+  color: #aaa;
+}
+
+html.dark-theme .border-bottom,
+html.dark-theme .border-top,
+body.dark-theme .border-bottom,
+body.dark-theme .border-top {
+  border-color: #555 !important;
+}
+
+html.dark-theme .bg-body-tertiary,
+body.dark-theme .bg-body-tertiary {
+  background-color: #2d2d2d !important;
+  color: #e0e0e0;
+}
+
+/* Theme Toggle Button Styles */
+#global-theme-toggle {
+  border: 2px solid #6c757d;
+  background: transparent;
+  color: #6c757d;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+#global-theme-toggle:hover {
+  background: #6c757d;
+  color: white;
+  transform: scale(1.05);
+}
+
+html.dark-theme #global-theme-toggle,
+body.dark-theme #global-theme-toggle {
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+html.dark-theme #global-theme-toggle:hover,
+body.dark-theme #global-theme-toggle:hover {
+  background: #555;
+  color: white;
+}

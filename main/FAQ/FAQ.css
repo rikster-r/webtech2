@@ -18,3 +18,90 @@
 .chevron.rotated {
   transform: rotate(180deg);
 }
+
+/* Dark Theme Styles for FAQ */
+html.dark-theme body,
+body.dark-theme {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+html.dark-theme .faq-item,
+body.dark-theme .faq-item {
+  background: #3a3a3a;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+html.dark-theme .faq-question,
+body.dark-theme .faq-question {
+  background: #3a3a3a;
+  color: #e0e0e0;
+}
+
+html.dark-theme .faq-answer,
+body.dark-theme .faq-answer {
+  background: #2d2d2d;
+  color: #e0e0e0;
+}
+
+html.dark-theme .nav-link,
+body.dark-theme .nav-link {
+  color: #e0e0e0 !important;
+}
+
+html.dark-theme .nav-link:hover,
+body.dark-theme .nav-link:hover {
+  color: #ff8dbb !important;
+}
+
+html.dark-theme .text-dark,
+body.dark-theme .text-dark {
+  color: #e0e0e0 !important;
+}
+
+html.dark-theme .border-bottom,
+body.dark-theme .border-bottom {
+  border-bottom: 1px solid #555 !important;
+}
+
+html.dark-theme .bg-body-tertiary,
+body.dark-theme .bg-body-tertiary {
+  background-color: #2d2d2d !important;
+  color: #e0e0e0;
+}
+
+html.dark-theme .faq-title,
+body.dark-theme .faq-title {
+  color: #e0e0e0;
+}
+
+/* Theme Toggle Button Styles */
+#global-theme-toggle {
+  border: 2px solid #6c757d;
+  background: transparent;
+  color: #6c757d;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+#global-theme-toggle:hover {
+  background: #6c757d;
+  color: white;
+  transform: scale(1.05);
+}
+
+html.dark-theme #global-theme-toggle,
+body.dark-theme #global-theme-toggle {
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+html.dark-theme #global-theme-toggle:hover,
+body.dark-theme #global-theme-toggle:hover {
+  background: #555;
+  color: white;
+}
