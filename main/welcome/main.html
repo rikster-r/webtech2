@@ -28,6 +28,9 @@
     <script src="greeting.js" defer></script>
     <script src="dom-manipulation.js" defer></script>
     <script src="../../global-theme-toggle.js" defer></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="stats.js" defer></script>
   </head>
   <body class="d-flex flex-column min-vh-100 m-0">
     <div id="header"></div>
@@ -83,7 +86,34 @@
         </div>
       </div>
 
-      <!-- Image Gallery -->
+      <!-- Stats Section -->
+      <div class="stats-section mb-5">
+        <div class="row justify-content-center">
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="stat-card p-3 bg-light rounded shadow-sm">
+              <i class="fas fa-users mb-3 text-primary" style="font-size: 2rem;"></i>
+              <h4 class="counter mb-2" data-target="15000">0</h4>
+              <p class="text-muted">Happy Customers</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="stat-card p-3 bg-light rounded shadow-sm">
+              <i class="fas fa-shopping-bag mb-3 text-success" style="font-size: 2rem;"></i>
+              <h4 class="counter mb-2" data-target="10000">0</h4>
+              <p class="text-muted">Products Sold</p>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 mb-4">
+            <div class="stat-card p-3 bg-light rounded shadow-sm">
+              <i class="fas fa-star mb-3 text-warning" style="font-size: 2rem;"></i>
+              <h4 class="counter mb-2" data-target="4.8">0</h4>
+              <p class="text-muted">Average Rating</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Image Gallery -->
       <div class="image-gallery-section mb-4">
         <h3>Featured Images</h3>
         <div class="gallery-container">
