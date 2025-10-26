@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -118,3 +119,17 @@ body {
   font-size: 14px;
   font-weight: 500;
 }
+
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px; /* static width */
+  height: 0%; /* dynamic height */
+  background: linear-gradient(to bottom, #ff416c, #ff4b2b, #ff9a00, #ffdd00);
+  box-shadow: 0 0 10px rgba(255, 77, 0, 0.6);
+  z-index: 9999;
+  transition: height 0.1s ease-out;
+  border-radius: 0 3px 3px 0;
+}
+
