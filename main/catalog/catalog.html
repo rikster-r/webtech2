@@ -12,81 +12,83 @@
     />
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
 
-    <!-- Apply saved theme as early as possible -->
+    <!-- Apply saved theme -->
     <script src="../../global-theme.js"></script>
 
     <link rel="stylesheet" href="../../global.css" />
     <link href="catalog.css" rel="stylesheet" />
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+      /* 🔍 Custom search styling */
+      .search-bar input {
+        border-radius: 12px;
+        padding: 10px 15px;
+        border: 2px solid #ff4b93;
+        transition: all 0.3s ease;
+      }
+      .search-bar input:focus {
+        border-color: #d90368;
+        box-shadow: 0 0 10px rgba(217, 3, 104, 0.2);
+        outline: none;
+      }
+
+      /* ✨ Smooth fade for cards */
+      .card {
+        transition: all 0.4s ease;
+        opacity: 1;
+      }
+      .card.hidden {
+        opacity: 0;
+        transform: scale(0.95);
+        pointer-events: none;
+      }
+
+      /* 🕵️ Highlight match */
+      mark {
+        background-color: #ffe2ec;
+        color: #d90368;
+        font-weight: 600;
+        border-radius: 4px;
+        padding: 0 3px;
+      }
+
+      /* 🚫 No result message */
+      #no-results {
+        display: none;
+        color: #d90368;
+        font-weight: 500;
+      }
+    </style>
   </head>
+
   <body class="d-flex flex-column min-vh-100">
     <!-- Header -->
-    <header
-      class="d-flex justify-content-between align-items-center p-3 border-bottom"
-    >
+    <header class="d-flex justify-content-between align-items-center p-3 border-bottom">
       <div class="d-flex align-items-center gap-2">
-        <img
-          src="../../static/media/sticker.webp"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
+        <img src="../../static/media/sticker.webp" width="50" height="50" alt="Logo" />
         <h1 class="h5 m-0">Egoisty</h1>
       </div>
 
       <nav>
         <ul class="nav gap-3">
+          <li class="nav-item"><a class="nav-link text-dark" href="../welcome/main.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold text-danger" href="catalog.html">Catalog</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="../gallery/gallery.html">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="../FAQ/FAQ.html">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="../../authentication/login/login.html">Sign in</a></li>
+          <li class="nav-item"><a class="nav-link text-dark" href="../../authentication/register/register.html">Sign up</a></li>
           <li class="nav-item">
-            <a class="nav-link text-dark" href="../welcome/main.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fw-semibold text-danger" href="catalog.html"
-              >Catalog</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark" href="../gallery/gallery.html"
-              >Gallery</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark" href="../FAQ/FAQ.html">FAQ</a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link text-dark"
-              href="../../authentication/login/login.html"
-              >Sign in</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link text-dark"
-              href="../../authentication/register/register.html"
-              >Sign up</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link d-flex align-items-center text-dark"
-              href="../cart/cart.html"
-            >
-              <svg
-                class="me-1"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                width="20"
-                height="20"
-              >
-                <path
-                  d="M7 4h14l-1.1 8.8H8.9L7 4zm0 0L5.4 2H1m6 2l1.1 8.8v0M9 19.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5-.7-1.5-1.5-1.5S9 18.7 9 19.5zm9.5 0c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5-.7-1.5-1.5-1.5-1.5.7-1.5 1.5z"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+            <a class="nav-link d-flex align-items-center text-dark" href="../cart/cart.html">
+              <svg class="me-1" fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                <path d="M7 4h14l-1.1 8.8H8.9L7 4zm0 0L5.4 2H1m6 2l1.1 8.8v0M9 19.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5-.7-1.5-1.5-1.5S9 18.7 9 19.5zm9.5 0c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5-.7-1.5-1.5-1.5-1.5.7-1.5 1.5z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
               Cart <span class="badge bg-danger ms-1" id="cartCount">0</span>
             </a>
@@ -100,7 +102,7 @@
       </nav>
     </header>
 
-    <!-- Main layout with sidebar + catalog -->
+    <!-- Main layout -->
     <main class="container-fluid my-5">
       <div class="row">
         <!-- Sidebar -->
@@ -108,106 +110,60 @@
           <h2 class="h5 text-danger mb-3">Explore</h2>
           <nav>
             <ul class="list-unstyled">
-              <li>
-                <a
-                  href="#"
-                  class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link"
-                  >Filters</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link"
-                  >Categories</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link"
-                  >Brands</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link"
-                  >New Arrivals</a
-                >
-              </li>
+              <li><a href="#" class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link">Filters</a></li>
+              <li><a href="#" class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link">Categories</a></li>
+              <li><a href="#" class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link">Brands</a></li>
+              <li><a href="#" class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link">New Arrivals</a></li>
             </ul>
           </nav>
         </aside>
 
-        <!-- Catalog products -->
+        <!-- Catalog -->
         <section class="col-md-9 col-lg-10">
-          <div class="row g-4">
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a
-                href="../headphones.html"
-                class="text-decoration-none text-dark"
-              >
+          <!-- 🔍 Search bar -->
+          <div class="search-bar mb-4 text-center">
+            <input type="text" id="product-search" class="form-control mx-auto" style="max-width: 400px;" placeholder="Search for products..." />
+            <p id="no-results" class="mt-3">Nothing found 😢</p>
+          </div>
+
+          <div class="row g-4" id="product-list">
+            <div class="col-sm-6 col-md-4 col-lg-3 product-item">
+              <a href="../headphones.html" class="text-decoration-none text-dark">
                 <div class="card text-center p-3 shadow-sm h-100">
                   <div class="display-3">🎧</div>
                   <h3 class="h6 mt-3 mb-1">Premium Wireless Headphones</h3>
                   <p class="text-secondary mb-2">13 980 ₸</p>
-
-                  <div
-                    class="btn-group"
-                    role="group"
-                    aria-label="Product catalog"
-                  >
+                  <div class="btn-group" role="group">
                     <button type="button" class="btn buy-btn">Buy</button>
-                    <a href="../cart/cart.html" class="btn add-cart-button"
-                      >Add to Cart</a
-                    >
+                    <a href="../cart/cart.html" class="btn add-cart-button">Add to Cart</a>
                   </div>
                 </div>
               </a>
             </div>
 
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a
-                href="../smartphone-case.html"
-                class="text-decoration-none text-dark"
-              >
+            <div class="col-sm-6 col-md-4 col-lg-3 product-item">
+              <a href="../smartphone-case.html" class="text-decoration-none text-dark">
                 <div class="card text-center p-3 shadow-sm h-100">
                   <div class="display-3">📱</div>
                   <h3 class="h6 mt-3 mb-1">Premium Smartphone Case</h3>
                   <p class="text-secondary mb-2">2 490 ₸</p>
-                  <div
-                    class="btn-group"
-                    role="group"
-                    aria-label="Product catalog"
-                  >
+                  <div class="btn-group" role="group">
                     <button type="button" class="btn buy-btn">Buy</button>
-                    <a href="../cart/cart.html" class="btn add-cart-button"
-                      >Add to Cart</a
-                    >
+                    <a href="../cart/cart.html" class="btn add-cart-button">Add to Cart</a>
                   </div>
                 </div>
               </a>
             </div>
 
-            <div class="col-sm-6 col-md-4 col-lg-3">
-              <a
-                href="../smartwatches.html"
-                class="text-decoration-none text-dark"
-              >
+            <div class="col-sm-6 col-md-4 col-lg-3 product-item">
+              <a href="../smartwatches.html" class="text-decoration-none text-dark">
                 <div class="card text-center p-3 shadow-sm h-100">
                   <div class="display-3">⌚</div>
                   <h3 class="h6 mt-3 mb-1">Premium Smartwatch Series X</h3>
                   <p class="text-secondary mb-2">4 950 ₸</p>
-                  <div
-                    class="btn-group"
-                    role="group"
-                    aria-label="Product catalog"
-                  >
+                  <div class="btn-group" role="group">
                     <button type="button" class="btn buy-btn">Buy</button>
-                    <a href="../cart/cart.html" class="btn add-cart-button"
-                      >Add to Cart</a
-                    >
+                    <a href="../cart/cart.html" class="btn add-cart-button">Add to Cart</a>
                   </div>
                 </div>
               </a>
@@ -221,7 +177,76 @@
       Yerkebulan Zhan, Danial Seit, Tassimov Arsen, Uzbekbay Abilkaiyr
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- ✅ ИСПРАВЛЕННЫЙ СКРИПТ ПОИСКА -->
+    <script>
+      $(document).ready(function () {
+        const $searchInput = $("#product-search");
+        const $items = $("#product-list .product-item");
+        const $noResults = $("#no-results");
+
+        // Сохраняем оригинальные названия товаров
+        $items.each(function () {
+          const $title = $(this).find("h3");
+          const originalText = $title.text().trim();
+          $title.attr("data-original", originalText);
+        });
+
+        // Функция для экранирования спецсимволов в RegExp
+        function escapeRegExp(string) {
+          return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        }
+
+        // Обработчик ввода в поле поиска
+        $searchInput.on("input", function () {
+          const query = $(this).val().trim().toLowerCase();
+          let visibleCount = 0;
+
+          // Если поле пустое - показываем все товары
+          if (!query) {
+            $items.each(function () {
+              const $title = $(this).find("h3");
+              $title.html($title.attr("data-original"));
+              $(this).removeClass("hidden").show();
+            });
+            $noResults.hide();
+            return;
+          }
+
+          // Создаём регулярное выражение для подсветки
+          const safeQuery = escapeRegExp(query);
+          const regex = new RegExp("(" + safeQuery + ")", "gi");
+
+          // Проверяем каждый товар
+          $items.each(function () {
+            const $item = $(this);
+            const $title = $item.find("h3");
+            const originalText = $title.attr("data-original");
+            const lowerText = originalText.toLowerCase();
+
+            if (lowerText.includes(query)) {
+              // Товар найден - показываем и подсвечиваем
+              $item.removeClass("hidden").show();
+              const highlighted = originalText.replace(regex, "<mark>$1</mark>");
+              $title.html(highlighted);
+              visibleCount++;
+            } else {
+              // Товар не найден - скрываем
+              $item.addClass("hidden").hide();
+              $title.html(originalText);
+            }
+          });
+
+          // Показываем/скрываем сообщение "Nothing found"
+          if (visibleCount === 0) {
+            $noResults.show();
+          } else {
+            $noResults.hide();
+          }
+        });
+      });
+    </script>
+
+    <!-- Bootstrap + global scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="catalog.js" defer></script>
     <script src="../../global-theme-toggle.js"></script>

@@ -56,11 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'ArrowRight') {
           e.preventDefault();
           const next = navLinks[(index + 1) % navLinks.length];
-          next.focus();
+          if (next) next.focus();
         } else if (e.key === 'ArrowLeft') {
           e.preventDefault();
           const prev = navLinks[(index - 1 + navLinks.length) % navLinks.length];
-          prev.focus();
+          if (prev) prev.focus();
         }
       });
     });
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3. HIGHER-ORDER FUNCTIONS - Enhanced product display using map
   function createProductCards() {
-    const productContainer = document.querySelector('.col-md-9 .row');
+    const productContainer = document.querySelector('#product-list');
     if (!productContainer) return;
 
     // Use map (Higher-Order Function) to transform product data
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `<span class="badge bg-danger position-absolute top-0 end-0 m-2">-10%</span>` : '';
       
       return `
-        <div class="col-sm-6 col-md-4 col-lg-3 product-card" data-product-id="${product.id}">
+        <div class="col-sm-6 col-md-4 col-lg-3 product-item product-card" data-product-id="${product.id}">
           <a href="../headphones.html" class="text-decoration-none text-dark">
             <div class="card text-center p-3 shadow-sm h-100 position-relative">
               ${discountBadge}
@@ -233,12 +233,13 @@ document.addEventListener('DOMContentLoaded', () => {
   function setupEnhancedButtons() {
     // Buy buttons
     document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('buy-btn')) {
+      const buyBtn = e.target;
+      if (buyBtn && buyBtn.classList && buyBtn.classList.contains('buy-btn')) {
         e.preventDefault();
-        const productId = parseInt(e.target.getAttribute('data-product-id'));
+        const productId = parseInt(buyBtn.getAttribute('data-product-id'));
         
         soundManager.playSound('buy');
-        animationManager.bounce(e.target, 1.2, 300);
+        animationManager.bounce(buyBtn, 1.2, 300);
         
         // Show notification
         showNotification('Redirecting to checkout...', 'success');
@@ -248,17 +249,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
       }
       
-      if (e.target.classList.contains('add-cart-button')) {
+      const addBtn = e.target;
+      if (addBtn && addBtn.classList && addBtn.classList.contains('add-cart-button')) {
         e.preventDefault();
-        const productId = parseInt(e.target.getAttribute('data-product-id'));
+        const productId = parseInt(addBtn.getAttribute('data-product-id'));
         
         if (catalogManager.addToCart(productId)) {
           soundManager.playSound('add');
-          animationManager.bounce(e.target, 1.1, 250);
+          animationManager.bounce(addBtn, 1.1, 250);
           showNotification('Product added to cart!', 'success');
         } else {
           soundManager.playSound('error');
-          animationManager.shake(e.target);
+          animationManager.shake(addBtn);
           showNotification('Product not available!', 'error');
         }
       }
@@ -266,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hover effects on buttons
     document.addEventListener('mouseenter', (e) => {
-      if (e.target.classList.contains('btn')) {
+      if (e.target && e.target.classList && e.target.classList.contains('btn')) {
         soundManager.playSound('hover');
         e.target.style.transform = 'translateY(-2px)';
         e.target.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
@@ -275,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, true);
 
     document.addEventListener('mouseleave', (e) => {
-      if (e.target.classList.contains('btn')) {
+      if (e.target && e.target.classList && e.target.classList.contains('btn')) {
         e.target.style.transform = 'translateY(0)';
         e.target.style.boxShadow = '';
       }
@@ -285,22 +287,58 @@ document.addEventListener('DOMContentLoaded', () => {
   // Enhanced product card interactions
   function setupProductCardInteractions() {
     document.addEventListener('mouseenter', (e) => {
-      const card = e.target.closest('.card');
-      if (card && !e.target.closest('.btn-group')) {
-        card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-        card.style.transform = 'translateY(-5px)';
-        card.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+      // Находим карточку через parentElement
+      let element = e.target;
+      let card = null;
+      
+      // Идём вверх по DOM дереву, чтобы найти .card
+      while (element && element !== document) {
+        if (element.classList && element.classList.contains('card')) {
+          card = element;
+          break;
+        }
+        element = element.parentElement;
+      }
+      
+      if (card) {
+        // Проверяем, не внутри ли мы .btn-group
+        let isInsideButtonGroup = false;
+        let checkElement = e.target;
+        while (checkElement && checkElement !== card) {
+          if (checkElement.classList && checkElement.classList.contains('btn-group')) {
+            isInsideButtonGroup = true;
+            break;
+          }
+          checkElement = checkElement.parentElement;
+        }
         
-        // Animate emoji
-        const emoji = card.querySelector('.product-emoji');
-        if (emoji) {
-          animationManager.bounce(emoji, 1.1, 200);
+        if (!isInsideButtonGroup) {
+          card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+          card.style.transform = 'translateY(-5px)';
+          card.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+          
+          // Animate emoji
+          const emoji = card.querySelector('.product-emoji');
+          if (emoji) {
+            animationManager.bounce(emoji, 1.1, 200);
+          }
         }
       }
     }, true);
 
     document.addEventListener('mouseleave', (e) => {
-      const card = e.target.closest('.card');
+      // Находим карточку через parentElement
+      let element = e.target;
+      let card = null;
+      
+      while (element && element !== document) {
+        if (element.classList && element.classList.contains('card')) {
+          card = element;
+          break;
+        }
+        element = element.parentElement;
+      }
+      
       if (card) {
         card.style.transform = 'translateY(0)';
         card.style.boxShadow = '';
@@ -362,15 +400,19 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Add page load animation
   const mainContent = document.querySelector('.container-fluid');
-  mainContent.style.opacity = '0';
-  mainContent.style.transform = 'translateY(20px)';
-  mainContent.style.transition = 'all 0.8s ease';
-  
-  setTimeout(() => {
-    mainContent.style.opacity = '1';
-    mainContent.style.transform = 'translateY(0)';
-  }, 100);
+  if (mainContent) {
+    mainContent.style.opacity = '0';
+    mainContent.style.transform = 'translateY(20px)';
+    mainContent.style.transition = 'all 0.8s ease';
+    
+    setTimeout(() => {
+      mainContent.style.opacity = '1';
+      mainContent.style.transform = 'translateY(0)';
+    }, 100);
+  }
 
-  // Advanced Features Integration
-  setupAdvancedFeatures();
+  // Advanced Features Integration (if function exists)
+  if (typeof setupAdvancedFeatures === 'function') {
+    setupAdvancedFeatures();
+  }
 });
