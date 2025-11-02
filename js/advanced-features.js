@@ -587,42 +587,6 @@ function setupEnhancedInteractions() {
   });
 }
 
-// Display product statistics
-function displayProductStats() {
-  const stats = DataProcessor.getProductStats();
-  console.log('Product Statistics:', stats);
-  
-  // Create stats panel
-  const statsElement = document.createElement('div');
-  statsElement.innerHTML = `
-    <div class="stats-container" style="
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      font-size: 12px;
-      z-index: 999;
-      max-width: 200px;
-      border: 1px solid #dee2e6;
-    ">
-      <h6 style="margin: 0 0 10px 0; color: #dc3545;">Store Stats</h6>
-      <p style="margin: 2px 0;">Products: ${stats.totalProducts}</p>
-      <p style="margin: 2px 0;">Avg Price: ${Math.round(stats.averagePrice)} ₸</p>
-      <p style="margin: 2px 0;">Categories: ${Object.keys(stats.categories).length}</p>
-      <p style="margin: 2px 0;">Most Expensive: ${stats.mostExpensive}</p>
-      <p style="margin: 2px 0;">Cheapest: ${stats.cheapest}</p>
-    </div>
-  `;
-  
-  document.body.appendChild(statsElement);
-  
-  // Add animation to stats panel
-  animationManager.slideIn(statsElement, 'left', 600);
-}
-
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize sound manager
@@ -630,9 +594,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Add event listeners for enhanced interactions
   setupEnhancedInteractions();
-  
-  // Display initial product stats
-  displayProductStats();
   
   // Update cart count
   updateCartCount();

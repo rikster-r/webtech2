@@ -203,7 +203,7 @@ $(document).ready(function () {
       if (aHtml !== $answer.text()) {
         matched = true;
         $answer.html(aHtml);
-      }
+      }d
 
       // Show/hide depending on match
       if (matched) {

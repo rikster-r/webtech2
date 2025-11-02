@@ -460,3 +460,9 @@ body.dark-theme #global-theme-toggle:hover {
   background: #555;
   color: white;
 }
+
+html.dark-theme input {
+  background-color: #2d2d2d ;
+  border: 1px solid #6c757d;
+  color: white;
+}

@@ -105,3 +105,9 @@ body.dark-theme #global-theme-toggle:hover {
   background: #555;
   color: white;
 }
+
+html.dark-theme #search-box {
+  background-color: #3a3a3a;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
