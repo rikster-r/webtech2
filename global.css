@@ -149,3 +149,100 @@ html.dark-theme ::placeholder {
   transition: height 0.1s ease-out;
   border-radius: 0 3px 3px 0;
 }
+
+/* Global dark-theme fallbacks for pages that don't have per-page dark CSS */
+html.dark-theme,
+body.dark-theme {
+  background-color: #121212;
+  color: #e6e6e6;
+}
+
+/* Make standard cards darker in dark mode */
+html.dark-theme .card,
+body.dark-theme .card {
+  background-color: #1f1f1f;
+  color: #e6e6e6;
+  border-color: rgba(255,255,255,0.06);
+}
+
+/* Utility background overrides (help pages using bg-light etc.) */
+html.dark-theme .bg-light,
+body.dark-theme .bg-light {
+  background-color: #191919 !important;
+  color: #e6e6e6;
+}
+
+/* Breadcrumbs, secondary text and muted colors */
+html.dark-theme .breadcrumb,
+body.dark-theme .breadcrumb {
+  background: transparent;
+}
+
+html.dark-theme .text-secondary,
+body.dark-theme .text-secondary,
+html.dark-theme .text-muted,
+body.dark-theme .text-muted {
+  color: #bdbdbd !important;
+}
+
+/* Buttons and nav links readability */
+html.dark-theme .nav-link.text-dark,
+body.dark-theme .nav-link.text-dark {
+  color: #e6e6e6 !important;
+}
+
+/* Ensure header background in dark theme overrides utility classes */
+html.dark-theme header,
+body.dark-theme header {
+  background-color: #311324; /* match other dark header styles */
+  color: #fff !important;
+}
+
+/* Override when header has utility classes like bg-white (Bootstrap) */
+html.dark-theme header.bg-white,
+body.dark-theme header.bg-white {
+  background-color: #311324 !important;
+  color: #fff !important;
+}
+
+/* Theme toggle button container */
+.theme-toggle-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Circular toggle button styling to match screenshot */
+#global-theme-toggle {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: transparent;
+}
+
+html.dark-theme #global-theme-toggle,
+body.dark-theme #global-theme-toggle {
+  border-color: rgba(255,255,255,0.14);
+  color: #fff;
+  background: rgba(255,255,255,0.02);
+}
+
+/* Make inputs darker */
+html.dark-theme .form-control,
+body.dark-theme .form-control {
+  background-color: #2a2a2a;
+  color: #e6e6e6;
+  border-color: #3a3a3a;
+}
+
+/* Small adjustments for badges and tags */
+html.dark-theme .badge.bg-danger,
+body.dark-theme .badge.bg-danger {
+  background-color: #b71c3a;
+  color: #fff;
+}
+

@@ -324,3 +324,198 @@
     grid-template-columns: 1fr;
   }
 }
+/* Dark Theme for Product Page */
+html.dark-theme,
+body.dark-theme {
+  background-color: #121212;
+  color: #e6e6e6;
+}
+
+html.dark-theme .product-section,
+body.dark-theme .product-section {
+  background-color: #1f1f1f;
+  color: #e6e6e6;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+html.dark-theme .card,
+body.dark-theme .card {
+  background-color: #1f1f1f;
+  color: #e6e6e6;
+  border-color: rgba(255,255,255,0.06);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+html.dark-theme .bg-light,
+body.dark-theme .bg-light {
+  background-color: #2a2a2a !important;
+  color: #e6e6e6;
+}
+
+html.dark-theme .text-muted,
+body.dark-theme .text-muted {
+  color: #bdbdbd !important;
+}
+
+html.dark-theme .text-secondary,
+body.dark-theme .text-secondary {
+  color: #bdbdbd !important;
+}
+
+html.dark-theme .form-control,
+body.dark-theme .form-control {
+  background-color: #2a2a2a;
+  color: #e6e6e6;
+  border-color: #3a3a3a;
+}
+
+html.dark-theme .input-group-text,
+body.dark-theme .input-group-text {
+  background-color: #3a3a3a;
+  color: #e6e6e6;
+  border-color: #3a3a3a;
+}
+
+html.dark-theme .btn-outline-secondary,
+body.dark-theme .btn-outline-secondary {
+  color: #e6e6e6;
+  border-color: #5a5a5a;
+  background-color: transparent;
+}
+
+html.dark-theme .btn-outline-secondary:hover,
+body.dark-theme .btn-outline-secondary:hover {
+  background-color: #5a5a5a;
+  border-color: #5a5a5a;
+  color: #e6e6e6;
+}
+
+html.dark-theme .border,
+body.dark-theme .border {
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+html.dark-theme .border-2,
+body.dark-theme .border-2 {
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+html.dark-theme .border-bottom,
+body.dark-theme .border-bottom {
+  border-bottom-color: rgba(255,255,255,0.1) !important;
+}
+
+html.dark-theme .color-option.white,
+body.dark-theme .color-option.white {
+  border-color: #5a5a5a;
+  background-color: #fff;
+}
+
+html.dark-theme .color-option.active,
+body.dark-theme .color-option.active {
+  border-color: #d90368 !important;
+}
+
+html.dark-theme .btn-danger,
+body.dark-theme .btn-danger {
+  background-color: #d90368;
+  border-color: #d90368;
+}
+
+html.dark-theme .btn-danger:hover,
+body.dark-theme .btn-danger:hover {
+  background-color: #b80257;
+  border-color: #b80257;
+}
+
+html.dark-theme .btn-outline-danger,
+body.dark-theme .btn-outline-danger {
+  color: #d90368;
+  border-color: #d90368;
+  background-color: transparent;
+}
+
+html.dark-theme .btn-outline-danger:hover,
+body.dark-theme .btn-outline-danger:hover {
+  background-color: #d90368;
+  color: white;
+  border-color: #d90368;
+}
+
+html.dark-theme .breadcrumb,
+body.dark-theme .breadcrumb {
+  background: transparent;
+}
+
+html.dark-theme .breadcrumb a,
+body.dark-theme .breadcrumb a {
+  color: #bdbdbd;
+}
+
+html.dark-theme .breadcrumb a:hover,
+body.dark-theme .breadcrumb a:hover {
+  color: #e6e6e6;
+}
+
+html.dark-theme .breadcrumb-item.active,
+body.dark-theme .breadcrumb-item.active {
+  color: #bdbdbd;
+}
+
+html.dark-theme .footer,
+body.dark-theme .footer,
+html.dark-theme .bg-body-tertiary,
+body.dark-theme .bg-body-tertiary {
+  background-color: #1f1f1f !important;
+  color: #bdbdbd;
+  border-top-color: #3a3a3a;
+}
+
+html.dark-theme .product-info h1,
+body.dark-theme .product-info h1 {
+  color: #e6e6e6;
+}
+
+html.dark-theme .option-label,
+body.dark-theme .option-label {
+  color: #e6e6e6;
+}
+
+html.dark-theme .quantity-label,
+body.dark-theme .quantity-label {
+  color: #e6e6e6;
+}
+
+html.dark-theme .main-image,
+body.dark-theme .main-image {
+  background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+}
+
+html.dark-theme .thumbnail,
+body.dark-theme .thumbnail {
+  background: #2a2a2a;
+  border-color: #3a3a3a;
+}
+
+html.dark-theme .thumbnail.active,
+body.dark-theme .thumbnail.active,
+html.dark-theme .thumbnail:hover,
+body.dark-theme .thumbnail:hover {
+  border-color: #d90368;
+}
+
+html.dark-theme .product-features,
+body.dark-theme .product-features {
+  background: #1f1f1f;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+html.dark-theme .feature-content h3,
+body.dark-theme .feature-content h3 {
+  color: #e6e6e6;
+}
+
+html.dark-theme .feature-content p,
+body.dark-theme .feature-content p {
+  color: #bdbdbd;
+}

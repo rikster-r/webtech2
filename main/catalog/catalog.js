@@ -289,11 +289,23 @@ function createProductCard(product, index) {
   const col = document.createElement('div');
   col.className = 'col-sm-6 col-md-4 col-lg-3';
 
-  const discountBadge = product.price > 10000 ? 
+  const discountBadge = product.price > 10000 ?
     `<span class="badge bg-danger position-absolute top-0 end-0 m-2">-10%</span>` : '';
 
+  // Map product IDs to their detail page paths (update map when you add pages)
+  const productPageMap = {
+    1: '../headphones.html',
+    2: '../smartphone-case.html',
+    3: '../smartwatches.html',
+    4: '#',
+    5: '#',
+    6: '#'
+  };
+
+  const productLink = productPageMap[product.id] || '#';
+
   col.innerHTML = `
-    <a href="../headphones.html" class="text-decoration-none text-dark">
+    <a href="${productLink}" class="text-decoration-none text-dark">
       <div class="card text-center p-3 shadow-sm h-100 position-relative">
         ${discountBadge}
         <div class="display-3">${product.emoji}</div>
