@@ -111,6 +111,10 @@ resetBtn.addEventListener('click', () => {
     usernameInput.focus();
 });
 
+$("#resetBtn").click(function() {
+  $("#resetBtn").css("color", "red");
+
+});
 [usernameInput, passwordInput].forEach(input => {
     input.addEventListener('input', () => clearInvalid(input));
     input.addEventListener('keydown', (ev) => {

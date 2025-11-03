@@ -11,12 +11,16 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="../global.css" />
+  <link rel="stylesheet" href="../global.css" />
+  <!-- Font Awesome (for theme toggle icon) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- Apply saved theme as early as possible -->
+  <script src="../global-theme.js"></script>
   </head>
   <body class="d-flex flex-column min-vh-100">
 
-    <!-- Header -->
-    <header class="d-flex justify-content-between align-items-center p-3 border-bottom bg-white">
+  <!-- Header -->
+  <header class="d-flex justify-content-between align-items-center p-3 border-bottom bg-white">
       <div class="d-flex align-items-center gap-2">
         <img src="../../static/media/sticker.webp" width="50" height="50" alt="Logo" />
         <h1 class="h5 m-0">Egoisty</h1>
@@ -46,6 +50,12 @@
           </li>
         </ul>
       </nav>
+      <!-- Theme Toggle -->
+      <div class="theme-toggle-container">
+        <button id="global-theme-toggle" class="btn btn-outline-secondary" title="Toggle Dark Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
     </header>
 
     <!-- Main Content -->
@@ -139,5 +149,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../global-theme-toggle.js" defer></script>
   </body>
 </html>
