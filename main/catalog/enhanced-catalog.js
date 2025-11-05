@@ -1,430 +1,293 @@
-  document.addEventListener('DOMContentLoaded', () => {
-    // 1. OBJECTS AND METHODS - Enhanced Product Management
-    const catalogManager = {
-      products: [
-        { id: 1, name: 'Premium Wireless Headphones', price: 13980, category: 'audio', emoji: '🎧', rating: 4.8, inStock: true },
-        { id: 2, name: 'Premium Smartphone Case', price: 2490, category: 'accessories', emoji: '📱', rating: 4.5, inStock: true },
-        { id: 3, name: 'Premium Smartwatch Series X', price: 4950, category: 'wearables', emoji: '⌚', rating: 4.7, inStock: true },
-        { id: 4, name: 'Gaming Mouse Pro', price: 8500, category: 'gaming', emoji: '🖱️', rating: 4.9, inStock: true },
-        { id: 5, name: 'Wireless Keyboard', price: 6200, category: 'accessories', emoji: '⌨️', rating: 4.6, inStock: true },
-        { id: 6, name: 'Bluetooth Speaker', price: 3200, category: 'audio', emoji: '🔊', rating: 4.4, inStock: true }
-      ],
-      cart: [],
-      filters: { category: 'all', priceRange: { min: 0, max: 50000 }, searchTerm: '' },
-      
-      // Object method to get filtered products
-      getFilteredProducts() {
-        return this.products.filter(product => {
-          const matchesCategory = this.filters.category === 'all' || product.category === this.filters.category;
-          const matchesPrice = product.price >= this.filters.priceRange.min && product.price <= this.filters.priceRange.max;
-          const matchesSearch = product.name.toLowerCase().includes(this.filters.searchTerm.toLowerCase());
-          return matchesCategory && matchesPrice && matchesSearch;
-        });
-      },
-      
-      // Object method to add to cart
-      addToCart(productId) {
-        const product = this.products.find(p => p.id === productId);
-        if (product && product.inStock) {
-          this.cart.push(product);
-          this.updateCartCount();
-          return true;
-        }
-        return false;
-      },
-      
-      // Object method to get cart count
-      getCartCount() {
-        return this.cart.length;
-      },
-      
-      // Object method to update cart count display
-      updateCartCount() {
-        const cartCountElements = document.querySelectorAll('#cartCount');
-        cartCountElements.forEach(element => {
-          element.textContent = this.getCartCount();
-        });
-      }
-    };
-
-    // 2. ARRAYS AND LOOPS - Enhanced navigation and interactions
-    const navLinks = document.querySelectorAll('header nav .nav-link');
-    if (navLinks && navLinks.length > 0) {
-      // Use forEach (Higher-Order Function) for navigation
-      navLinks.forEach((link, index) => {
-        link.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            const next = navLinks[(index + 1) % navLinks.length];
-            if (next) next.focus();
-          } else if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            const prev = navLinks[(index - 1 + navLinks.length) % navLinks.length];
-            if (prev) prev.focus();
-          }
-        });
-      });
-    }
-
-    // 3. HIGHER-ORDER FUNCTIONS - Enhanced product display using map
-    function createProductCards() {
-      const productContainer = document.querySelector('#product-list');
-      if (!productContainer) return;
-
-      // Use map (Higher-Order Function) to transform product data
-      const productCards = catalogManager.getFilteredProducts().map((product, index) => {
-        const discountBadge = product.price > 10000 ? 
-          `<span class="badge bg-danger position-absolute top-0 end-0 m-2">-10%</span>` : '';
-        
-        // Map ids to product pages (extend when more pages are added)
-        const productPageMap = {
-          1: '../headphones.html',
-          2: '../smartphone-case.html',
-          3: '../smartwatches.html',
-          4: '#',
-          5: '#',
-          6: '#'
-        };
-
-        const productLink = productPageMap[product.id] || '#';
-
-        return `
-          <div class="col-sm-6 col-md-4 col-lg-3 product-item product-card" data-product-id="${product.id}">
-            <a href="${productLink}" class="text-decoration-none text-dark">
-              <div class="card text-center p-3 shadow-sm h-100 position-relative">
-                ${discountBadge}
-                <div class="display-3 product-emoji">${product.emoji}</div>
-                <h3 class="h6 mt-3 mb-1">${product.name}</h3>
-                <p class="text-secondary mb-2">
-                  ${product.price.toLocaleString()} ₸
-                  ${product.price > 10000 ? `<br><small class="text-success">${Math.floor(product.price * 0.9).toLocaleString()} ₸</small>` : ''}
-                </p>
-                <div class="mb-2">
-                  ${'★'.repeat(Math.floor(product.rating))}${'☆'.repeat(5 - Math.floor(product.rating))}
-                  <small class="text-muted">(${product.rating})</small>
-                </div>
-                <div class="btn-group" role="group" aria-label="Product catalog">
-                  <button type="button" class="btn buy-btn" data-product-id="${product.id}">Buy</button>
-                  <button type="button" class="btn add-cart-button" data-product-id="${product.id}">Add to Cart</button>
-                </div>
-              </div>
-            </a>
-          </div>
-        `;
-      });
-
-      productContainer.innerHTML = productCards.join('');
-      
-      // Add staggered animation to product cards
-      const cards = productContainer.querySelectorAll('.product-card');
-      cards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'all 0.5s ease';
-        
-        setTimeout(() => {
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
-        }, index * 100);
-      });
-    }
-
-    // 4. SOUND EFFECTS - Enhanced audio system
-    let audioCtx;
-    const soundManager = {
-      sounds: {
-        click: { frequency: 800, duration: 0.1 },
-        success: { frequency: 600, duration: 0.2 },
-        add: { frequency: 700, duration: 0.15 },
-        buy: { frequency: 900, duration: 0.25 },
-        hover: { frequency: 500, duration: 0.05 }
-      },
-      
-      init() {
-        try {
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        } catch (err) {
-          console.warn('Audio not supported');
-        }
-      },
-      
-      playSound(soundType) {
-        if (!audioCtx) return;
-        
-        const sound = this.sounds[soundType] || this.sounds.click;
-        
-        try {
-          const o = audioCtx.createOscillator();
-          const g = audioCtx.createGain();
-          o.type = 'sine';
-          o.frequency.value = sound.frequency;
-          g.gain.value = 0.05;
-          o.connect(g);
-          g.connect(audioCtx.destination);
-          o.start();
-          g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + sound.duration);
-          o.stop(audioCtx.currentTime + sound.duration + 0.01);
-        } catch (err) {
-          console.warn('Sound playback failed');
-        }
-      }
-    };
-
-    // 5. ANIMATIONS - Enhanced animation system
-    const animationManager = {
-      // Bounce animation
-      bounce(element, scale = 1.1, duration = 300) {
-        if (!element) return;
-        
-        element.style.transition = `transform ${duration}ms cubic-bezier(0.68, -0.55, 0.265, 1.55)`;
-        element.style.transform = `scale(${scale})`;
-        
-        setTimeout(() => {
-          element.style.transform = 'scale(1)';
-        }, duration / 2);
-      },
-      
-      // Slide in animation
-      slideIn(element, direction = 'left', duration = 500) {
-        if (!element) return;
-        
-        const transforms = {
-          left: 'translateX(-100%)',
-          right: 'translateX(100%)',
-          up: 'translateY(-100%)',
-          down: 'translateY(100%)'
-        };
-        
-        element.style.transition = `transform ${duration}ms ease-out`;
-        element.style.transform = transforms[direction] || transforms.left;
-        
-        requestAnimationFrame(() => {
-          element.style.transform = 'translate(0, 0)';
-        });
-      },
-      
-      // Pulse animation
-      pulse(element, duration = 1000) {
-        if (!element) return;
-        
-        const keyframes = [
-          { transform: 'scale(1)', opacity: 1 },
-          { transform: 'scale(1.05)', opacity: 0.8 },
-          { transform: 'scale(1)', opacity: 1 }
-        ];
-        
-        element.animate(keyframes, {
-          duration: duration,
-          iterations: 3,
-          easing: 'ease-in-out'
-        });
-      },
-      
-      // Shake animation
-      shake(element, intensity = 10, duration = 500) {
-        if (!element) return;
-        
-        const keyframes = [
-          { transform: 'translateX(0)' },
-          { transform: `translateX(-${intensity}px)` },
-          { transform: `translateX(${intensity}px)` },
-          { transform: `translateX(-${intensity/2}px)` },
-          { transform: `translateX(${intensity/2}px)` },
-          { transform: 'translateX(0)' }
-        ];
-        
-        element.animate(keyframes, {
-          duration: duration,
-          iterations: 1,
-          easing: 'ease-in-out'
-        });
-      }
-    };
-
-    // Enhanced button interactions with sound and animation
-    function setupEnhancedButtons() {
-      // Buy buttons
-      document.addEventListener('click', (e) => {
-        const buyBtn = e.target;
-        if (buyBtn && buyBtn.classList && buyBtn.classList.contains('buy-btn')) {
-          e.preventDefault();
-          const productId = parseInt(buyBtn.getAttribute('data-product-id'));
-          
-          soundManager.playSound('buy');
-          animationManager.bounce(buyBtn, 1.2, 300);
-          
-          // Show notification
-          showNotification('Redirecting to checkout...', 'success');
-          
-          setTimeout(() => {
-            window.location.href = '../cart/cart.html';
-          }, 500);
-        }
-        
-        const addBtn = e.target;
-        if (addBtn && addBtn.classList && addBtn.classList.contains('add-cart-button')) {
-          e.preventDefault();
-          const productId = parseInt(addBtn.getAttribute('data-product-id'));
-          
-          if (catalogManager.addToCart(productId)) {
-            soundManager.playSound('add');
-            animationManager.bounce(addBtn, 1.1, 250);
-            showNotification('Product added to cart!', 'success');
-          } else {
-            soundManager.playSound('error');
-            animationManager.shake(addBtn);
-            showNotification('Product not available!', 'error');
-          }
-        }
-      });
-
-      // Hover effects on buttons
-      document.addEventListener('mouseenter', (e) => {
-        if (e.target && e.target.classList && e.target.classList.contains('btn')) {
-          soundManager.playSound('hover');
-          e.target.style.transform = 'translateY(-2px)';
-          e.target.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-          e.target.style.transition = 'all 0.3s ease';
-        }
-      }, true);
-
-      document.addEventListener('mouseleave', (e) => {
-        if (e.target && e.target.classList && e.target.classList.contains('btn')) {
-          e.target.style.transform = 'translateY(0)';
-          e.target.style.boxShadow = '';
-        }
-      }, true);
-    }
-
-    // Enhanced product card interactions
-    function setupProductCardInteractions() {
-      document.addEventListener('mouseenter', (e) => {
-        // Находим карточку через parentElement
-        let element = e.target;
-        let card = null;
-        
-        // Идём вверх по DOM дереву, чтобы найти .card
-        while (element && element !== document) {
-          if (element.classList && element.classList.contains('card')) {
-            card = element;
-            break;
-          }
-          element = element.parentElement;
-        }
-        
-        if (card) {
-          // Проверяем, не внутри ли мы .btn-group
-          let isInsideButtonGroup = false;
-          let checkElement = e.target;
-          while (checkElement && checkElement !== card) {
-            if (checkElement.classList && checkElement.classList.contains('btn-group')) {
-              isInsideButtonGroup = true;
-              break;
-            }
-            checkElement = checkElement.parentElement;
-          }
-          
-          if (!isInsideButtonGroup) {
-            card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
-            card.style.transform = 'translateY(-5px)';
-            card.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
-            
-            // Animate emoji
-            const emoji = card.querySelector('.product-emoji');
-            if (emoji) {
-              animationManager.bounce(emoji, 1.1, 200);
-            }
-          }
-        }
-      }, true);
-
-      document.addEventListener('mouseleave', (e) => {
-        // Находим карточку через parentElement
-        let element = e.target;
-        let card = null;
-        
-        while (element && element !== document) {
-          if (element.classList && element.classList.contains('card')) {
-            card = element;
-            break;
-          }
-          element = element.parentElement;
-        }
-        
-        if (card) {
-          card.style.transform = 'translateY(0)';
-          card.style.boxShadow = '';
-        }
-      }, true);
-    }
-
-    // Notification system
-    function showNotification(message, type = 'info') {
-      const notification = document.createElement('div');
-      notification.className = `notification notification-${type}`;
-      notification.textContent = message;
-      
-      notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 15px 20px;
-        border-radius: 8px;
-        color: white;
-        font-weight: 500;
-        z-index: 1000;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        max-width: 300px;
-        word-wrap: break-word;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      `;
-
-      const colors = {
-        success: '#28a745',
-        error: '#dc3545',
-        warning: '#ffc107',
-        info: '#17a2b8'
-      };
-      notification.style.backgroundColor = colors[type] || colors.info;
-
-      document.body.appendChild(notification);
-
-      setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-      }, 100);
-
-      setTimeout(() => {
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-          if (notification.parentNode) {
-            notification.parentNode.removeChild(notification);
-          }
-        }, 300);
-      }, 3000);
-    }
-
-    // Initialize everything
-    soundManager.init();
-    createProductCards();
-    setupEnhancedButtons();
-    setupProductCardInteractions();
+document.addEventListener('DOMContentLoaded', () => {
+  const catalogManager = {
+    products: [
+      { id: 1, name: 'Premium Wireless Headphones', price: 13980, category: 'audio', emoji: '🎧', rating: 4.8, inStock: true },
+      { id: 2, name: 'Premium Smartphone Case', price: 2490, category: 'accessories', emoji: '📱', rating: 4.5, inStock: true },
+      { id: 3, name: 'Premium Smartwatch Series X', price: 4950, category: 'wearables', emoji: '⌚', rating: 4.7, inStock: true },
+      { id: 4, name: 'Gaming Mouse Pro', price: 8500, category: 'gaming', emoji: '🖱️', rating: 4.9, inStock: true },
+      { id: 5, name: 'Wireless Keyboard', price: 6200, category: 'accessories', emoji: '⌨️', rating: 4.6, inStock: true },
+      { id: 6, name: 'Bluetooth Speaker', price: 3200, category: 'audio', emoji: '🔊', rating: 4.4, inStock: true }
+    ],
+    cart: JSON.parse(localStorage.getItem('cart') || '[]'),
+    filters: {
+      category: 'all',
+      priceRange: { min: 0, max: 50000 },
+      searchTerm: ''
+    },
     
-    // Add page load animation
-    const mainContent = document.querySelector('.container-fluid');
-    if (mainContent) {
-      mainContent.style.opacity = '0';
-      mainContent.style.transform = 'translateY(20px)';
-      mainContent.style.transition = 'all 0.8s ease';
-      
-      setTimeout(() => {
-        mainContent.style.opacity = '1';
-        mainContent.style.transform = 'translateY(0)';
-      }, 100);
+    getFilteredProducts() {
+      return this.products.filter(product => {
+        const matchesCategory = this.filters.category === 'all' || product.category === this.filters.category;
+        const matchesPrice = product.price >= this.filters.priceRange.min && product.price <= this.filters.priceRange.max;
+        const matchesSearch = product.name.toLowerCase().includes(this.filters.searchTerm.toLowerCase());
+        return matchesCategory && matchesPrice && matchesSearch;
+      });
+    },
+    
+    addToCart(productId) {
+      const product = this.products.find(p => p.id === productId);
+      if (product && product.inStock) {
+        this.cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+        this.updateCartCount();
+        return true;
+      }
+      return false;
+    },
+    
+    updateCartCount() {
+      const cartCountEl = document.getElementById('cartCount');
+      if (cartCountEl) {
+        cartCountEl.textContent = this.cart.length;
+      }
     }
+  };
 
-    // Advanced Features Integration (if function exists)
-    if (typeof setupAdvancedFeatures === 'function') {
-      setupAdvancedFeatures();
+  let audioCtx;
+  const soundManager = {
+    init() {
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      } catch (err) {
+        console.log('Audio context not available');
+      }
+    },
+    
+    playSound(freq = 600, duration = 0.15) {
+      if (!audioCtx) return;
+      try {
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type = 'sine';
+        o.frequency.value = freq;
+        g.gain.value = 0.05;
+        o.connect(g);
+        g.connect(audioCtx.destination);
+        o.start();
+        g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        o.stop(audioCtx.currentTime + duration + 0.01);
+      } catch (err) {
+        console.log('Sound playback error');
+      }
+    }
+  };
+
+  function showNotification(message, type = 'info') {
+    const colors = { success: '#28a745', error: '#dc3545', warning: '#ffc107', info: '#17a2b8' };
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      background-color: ${colors[type]};
+      color: white;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      z-index: 9999;
+      animation: slideIn 0.3s ease;
+    `;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.animation = 'slideIn 0.3s ease reverse';
+      setTimeout(() => notification.remove(), 300);
+    }, 3000);
+  }
+
+  let currentSort = 'name';
+  function createProductCards() {
+    const container = document.getElementById('product-list');
+    if (!container) return;
+    
+    let products = catalogManager.getFilteredProducts();
+    
+    // Sort products
+    products = products.sort((a, b) => {
+      if (currentSort === 'price') return a.price - b.price;
+      if (currentSort === 'rating') return b.rating - a.rating;
+      return a.name.localeCompare(b.name);
+    });
+    
+    if (products.length === 0) {
+      container.innerHTML = `
+        <div class="col-12 text-center py-5">
+          <div class="text-muted">
+            <i class="fas fa-search fa-3x mb-3"></i>
+            <h4>No products found</h4>
+            <p>Try adjusting your filters</p>
+          </div>
+        </div>
+      `;
+      return;
+    }
+    
+    const html = products.map(product => {
+      const discount = product.price > 10000 ? `<span class="badge bg-danger position-absolute top-0 end-0 m-2">-10%</span>` : '';
+      const discountPrice = product.price > 10000 ? `<br><small class="text-success">${Math.floor(product.price * 0.9).toLocaleString()} ₸</small>` : '';
+      
+      return `
+        <div class="col-sm-6 col-md-4 col-lg-3 product-item product-card" data-product-id="${product.id}" data-product-name="${product.name.toLowerCase()}">
+          <div class="card text-center p-3 shadow-sm h-100 position-relative" style="cursor: pointer; transition: all 0.3s ease;">
+            ${discount}
+            <div class="display-3 product-emoji" style="transition: transform 0.1s ease;">${product.emoji}</div>
+            <h3 class="h6 mt-3 mb-1 product-name">${product.name}</h3>
+            <p class="text-secondary mb-2">${product.price.toLocaleString()} ₸${discountPrice}</p>
+            <div class="mb-2">${'★'.repeat(Math.floor(product.rating))}${'☆'.repeat(5 - Math.floor(product.rating))} <small class="text-muted">(${product.rating})</small></div>
+            <div class="btn-group w-100" role="group">
+              <button type="button" class="btn btn-primary buy-btn" data-product-id="${product.id}" style="transition: transform 0.15s ease;">Buy</button>
+              <button type="button" class="btn btn-outline-primary add-cart-button" data-product-id="${product.id}" style="transition: transform 0.15s ease;">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+    
+    container.innerHTML = html;
+    
+    // Animate cards
+    document.querySelectorAll('.product-card').forEach((card, i) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        card.style.transition = 'all 0.5s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, i * 50);
+    });
+  }
+
+  function setupFilters() {
+    const searchInput = document.getElementById('product-search');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const priceFilter = document.getElementById('priceFilter');
+    const priceDisplay = document.getElementById('priceDisplay');
+    const resetBtn = document.getElementById('resetFilters');
+    const sortBtn = document.getElementById('sortProducts');
+    
+    if (!searchInput || !categoryFilter || !priceFilter || !priceDisplay || !resetBtn || !sortBtn) {
+      console.error('Filter elements not found');
+      return;
+    }
+    
+    // Search filter
+    searchInput.addEventListener('input', function() {
+      catalogManager.filters.searchTerm = this.value.trim();
+      createProductCards();
+      soundManager.playSound(500, 0.05);
+    });
+    
+    // Category filter
+    categoryFilter.addEventListener('change', function() {
+      catalogManager.filters.category = this.value;
+      createProductCards();
+      soundManager.playSound(600, 0.1);
+      showNotification(`Filter: ${this.value === 'all' ? 'All Categories' : this.value}`, 'info');
+    });
+    
+    // Price filter
+    priceFilter.addEventListener('input', function() {
+      const maxPrice = parseInt(this.value);
+      catalogManager.filters.priceRange.max = maxPrice;
+      priceDisplay.textContent = `Max: ${maxPrice.toLocaleString()} ₸`;
+      createProductCards();
+    });
+    
+    // Reset filters
+    resetBtn.addEventListener('click', function() {
+      searchInput.value = '';
+      categoryFilter.value = 'all';
+      priceFilter.value = 50000;
+      priceDisplay.textContent = 'Max: 50,000 ₸';
+      catalogManager.filters = { category: 'all', priceRange: { min: 0, max: 50000 }, searchTerm: '' };
+      currentSort = 'name';
+      sortBtn.innerHTML = '<i class="fas fa-sort me-1"></i>Sort';
+      createProductCards();
+      soundManager.playSound(700, 0.15);
+      showNotification('Filters reset!', 'success');
+    });
+    
+    // Sort button
+    sortBtn.addEventListener('click', function() {
+      const sorts = ['name', 'price', 'rating'];
+      const currentIndex = sorts.indexOf(currentSort);
+      currentSort = sorts[(currentIndex + 1) % sorts.length];
+      const labels = { name: 'Name', price: 'Price', rating: 'Rating' };
+      this.innerHTML = `<i class="fas fa-sort me-1"></i>${labels[currentSort]}`;
+      createProductCards();
+      soundManager.playSound(650, 0.1);
+      showNotification(`Sorted by ${labels[currentSort]}`, 'info');
+    });
+  }
+
+  // Event delegation for buttons
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('buy-btn')) {
+      e.preventDefault();
+      soundManager.playSound(900, 0.25);
+      e.target.style.transform = 'scale(1.2)';
+      setTimeout(() => e.target.style.transform = 'scale(1)', 150);
+      showNotification('Redirecting to checkout...', 'success');
+    }
+    
+    if (e.target.classList.contains('add-cart-button')) {
+      e.preventDefault();
+      const id = parseInt(e.target.getAttribute('data-product-id'));
+      if (catalogManager.addToCart(id)) {
+        soundManager.playSound(700, 0.15);
+        e.target.style.transform = 'scale(1.1)';
+        setTimeout(() => e.target.style.transform = 'scale(1)', 125);
+        showNotification('Product added to cart!', 'success');
+        const badge = document.getElementById('cartCount');
+        if (badge) {
+          badge.style.animation = 'none';
+          setTimeout(() => badge.style.animation = 'pulse 0.5s', 10);
+        }
+      }
     }
   });
+
+  // Theme toggle
+  const themeToggle = document.getElementById('global-theme-toggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme');
+      const icon = themeToggle.querySelector('i');
+      if (icon) {
+        icon.className = document.body.classList.contains('dark-theme') ? 'fas fa-sun' : 'fas fa-moon';
+      }
+      soundManager.playSound(500, 0.1);
+    });
+  }
+
+  // Card hover effects
+  document.addEventListener('mouseenter', (e) => {
+    let card = e.target.closest('.card');
+    if (card && !e.target.closest('.btn-group')) {
+      card.style.transform = 'translateY(-5px)';
+      card.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+      const emoji = card.querySelector('.product-emoji');
+      if (emoji) {
+        emoji.style.transform = 'scale(1.1)';
+        setTimeout(() => emoji.style.transform = 'scale(1)', 100);
+      }
+    }
+  }, true);
+
+  document.addEventListener('mouseleave', (e) => {
+    let card = e.target.closest('.card');
+    if (card) {
+      card.style.transform = 'translateY(0)';
+      card.style.boxShadow = '';
+    }
+  }, true);
+
+  // Initialize
+  soundManager.init();
+  catalogManager.updateCartCount();
+  createProductCards();
+  setupFilters();
+
+});

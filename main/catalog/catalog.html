@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catalog - Egoisty</title>
+    <title>Shopping Cart - Minimal Shop</title>
 
     <!-- Bootstrap -->
     <link
@@ -17,20 +17,17 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
 
-    <!-- Apply saved theme -->
+    <!-- Apply saved theme as early as possible -->
     <script src="../../global-theme.js"></script>
 
     <link rel="stylesheet" href="../../global.css" />
-    <link href="catalog.css" rel="stylesheet" />
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="catalog.css" />
   </head>
+<body class="d-flex flex-column min-vh-100">
 
-  <body class="d-flex flex-column min-vh-100">
-    <!-- Header -->
-    <header
-      class="d-flex justify-content-between align-items-center p-3 border-bottom"
+<!-- Header -->
+<header
+      class="d-flex justify-content-between align-items-center p-3 border-bottom bg-white shadow-sm"
     >
       <div class="d-flex align-items-center gap-2">
         <img
@@ -38,6 +35,7 @@
           width="50"
           height="50"
           alt="Logo"
+          class="rounded-2"
         />
         <h1 class="h5 m-0">Egoisty</h1>
       </div>
@@ -48,7 +46,7 @@
             <a class="nav-link text-dark" href="../welcome/main.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-semibold text-danger" href="catalog.html"
+            <a class="nav-link text-dark" href="../catalog/catalog.html"
               >Catalog</a
             >
           </li>
@@ -71,7 +69,7 @@
           </li>
           <li class="nav-item">
             <a
-              class="nav-link d-flex align-items-center text-dark"
+              class="nav-link d-flex align-items-center text-white bg-danger rounded px-3 py-2"
               href="../cart/cart.html"
             >
               <svg
@@ -90,7 +88,10 @@
                   stroke-linejoin="round"
                 />
               </svg>
-              Cart <span class="badge bg-danger ms-1" id="cartCount">0</span>
+              Cart
+              <span class="badge bg-light text-danger ms-1" id="cartCount"
+                >0</span
+              >
             </a>
           </li>
           <li class="nav-item">
@@ -106,201 +107,66 @@
       </nav>
     </header>
 
-    <!-- Main layout -->
-    <main class="container-fluid my-5">
-      <div class="row">
+<!-- Main layout -->
+<main class="container-fluid my-5">
+    <div class="row">
         <!-- Sidebar -->
         <aside class="col-md-3 col-lg-2 mb-4 mb-md-0 bg-light p-4 rounded">
-          <h2 class="h5 text-danger mb-3">Explore</h2>
-          <nav>
-            <ul class="list-unstyled">
-              <li>
-                <a
-                  href="#"
-                  class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link"
-                  >Filters</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link"
-                  >Categories</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link"
-                  >Brands</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link"
-                  >New Arrivals</a
-                >
-              </li>
-            </ul>
-          </nav>
+            <h2 class="h5 text-danger mb-3">Explore</h2>
+            <nav>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link">Filters</a></li>
+                    <li><a href="#" class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link">Categories</a></li>
+                    <li><a href="#" class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link">Brands</a></li>
+                    <li><a href="#" class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link">New Arrivals</a></li>
+                </ul>
+            </nav>
         </aside>
 
         <!-- Catalog -->
         <section class="col-md-9 col-lg-10">
-          <!-- 🔍 Search bar -->
-          <div class="search-bar mb-4 text-center">
-            <input
-              type="text"
-              id="product-search"
-              class="form-control mx-auto"
-              style="max-width: 400px"
-              placeholder="Search for products..."
-            />
-          </div>
-
-          <div class="row g-4" id="product-list">
-            <div class="col-sm-6 col-md-4 col-lg-3 product-item">
-              <a
-                href="../headphones.html"
-                class="text-decoration-none text-dark"
-              >
-                <div class="card text-center p-3 shadow-sm h-100">
-                  <div class="display-3">🎧</div>
-                  <h3 class="h6 mt-3 mb-1">Premium Wireless Headphones</h3>
-                  <p class="text-secondary mb-2">13 980 ₸</p>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn buy-btn">Buy</button>
-                    <a href="../cart/cart.html" class="btn add-cart-button"
-                      >Add to Cart</a
-                    >
-                  </div>
+            <!-- Filter Section -->
+            <div class="filter-section mb-4">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-4">
+                        <label for="product-search" class="form-label fw-semibold"><i class="fas fa-search me-1"></i>Search Products</label>
+                        <input type="text" id="product-search" class="form-control" placeholder="Search for products...">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="categoryFilter" class="form-label fw-semibold"><i class="fas fa-filter me-1"></i>Category</label>
+                        <select id="categoryFilter" class="form-select">
+                            <option value="all">All Categories</option>
+                            <option value="audio">Audio</option>
+                            <option value="accessories">Accessories</option>
+                            <option value="wearables">Wearables</option>
+                            <option value="gaming">Gaming</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="priceFilter" class="form-label fw-semibold"><i class="fas fa-dollar-sign me-1"></i>Max Price</label>
+                        <input type="range" id="priceFilter" class="form-range" min="0" max="50000" value="50000">
+                        <div id="priceDisplay" class="text-muted small text-center">Max: 50,000 ₸</div>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="resetFilters" class="btn btn-outline-secondary w-100 mb-2"><i class="fas fa-redo me-1"></i>Reset</button>
+                        <button id="sortProducts" class="btn btn-outline-primary w-100"><i class="fas fa-sort me-1"></i>Sort</button>
+                    </div>
                 </div>
-              </a>
             </div>
 
-            <div class="col-sm-6 col-md-4 col-lg-3 product-item">
-              <a
-                href="../smartphone-case.html"
-                class="text-decoration-none text-dark"
-              >
-                <div class="card text-center p-3 shadow-sm h-100">
-                  <div class="display-3">📱</div>
-                  <h3 class="h6 mt-3 mb-1">Premium Smartphone Case</h3>
-                  <p class="text-secondary mb-2">2 490 ₸</p>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn buy-btn">Buy</button>
-                    <a href="../cart/cart.html" class="btn add-cart-button"
-                      >Add to Cart</a
-                    >
-                  </div>
-                </div>
-              </a>
-            </div>
-
-            <div class="col-sm-6 col-md-4 col-lg-3 product-item">
-              <a
-                href="../smartwatches.html"
-                class="text-decoration-none text-dark"
-              >
-                <div class="card text-center p-3 shadow-sm h-100">
-                  <div class="display-3">⌚</div>
-                  <h3 class="h6 mt-3 mb-1">Premium Smartwatch Series X</h3>
-                  <p class="text-secondary mb-2">4 950 ₸</p>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn buy-btn">Buy</button>
-                    <a href="../cart/cart.html" class="btn add-cart-button"
-                      >Add to Cart</a
-                    >
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
+            <!-- Products Grid -->
+            <div class="row g-4" id="product-list"></div>
         </section>
-      </div>
-    </main>
+    </div>
+</main>
 
-    <footer class="footer text-center py-3 bg-body-tertiary mt-auto">
-      Yerkebulan Zhan, Danial Seit, Tassimov Arsen, Uzbekbay Abilkaiyr
-    </footer>
+<footer class="footer text-center py-3 bg-body-tertiary mt-auto">
+    Yerkebulan Zhan, Danial Seit, Tassimov Arsen, Uzbekbay Abilkaiyr
+</footer>
 
-    <!-- ✅ ИСПРАВЛЕННЫЙ СКРИПТ ПОИСКА -->
-    <script>
-      $(document).ready(function () {
-        const $searchInput = $('#product-search');
-        const $items = $('#product-list .product-item');
-        const $noResults = $('#no-results');
-
-        // Сохраняем оригинальные названия товаров
-        $items.each(function () {
-          const $title = $(this).find('h3');
-          const originalText = $title.text().trim();
-          $title.attr('data-original', originalText);
-        });
-
-        // Функция для экранирования спецсимволов в RegExp
-        function escapeRegExp(string) {
-          return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        }
-
-        // Обработчик ввода в поле поиска
-        $searchInput.on('input', function () {
-          const query = $(this).val().trim().toLowerCase();
-          let visibleCount = 0;
-
-          // Если поле пустое - показываем все товары
-          if (!query) {
-            $items.each(function () {
-              const $title = $(this).find('h3');
-              $title.html($title.attr('data-original'));
-              $(this).removeClass('hidden').show();
-            });
-            $noResults.hide();
-            return;
-          }
-
-          // Создаём регулярное выражение для подсветки
-          const safeQuery = escapeRegExp(query);
-          const regex = new RegExp('(' + safeQuery + ')', 'gi');
-
-          // Проверяем каждый товар
-          $items.each(function () {
-            const $item = $(this);
-            const $title = $item.find('h3');
-            const originalText = $title.attr('data-original');
-            const lowerText = originalText.toLowerCase();
-
-            if (lowerText.includes(query)) {
-              // Товар найден - показываем и подсвечиваем
-              $item.removeClass('hidden').show();
-              const highlighted = originalText.replace(
-                regex,
-                '<mark>$1</mark>'
-              );
-              $title.html(highlighted);
-              visibleCount++;
-            } else {
-              // Товар не найден - скрываем
-              $item.addClass('hidden').hide();
-              $title.html(originalText);
-            }
-          });
-
-          // Показываем/скрываем сообщение "Nothing found"
-          if (visibleCount === 0) {
-            $noResults.show();
-          } else {
-            $noResults.hide();
-          }
-        });
-      });
-    </script>
-
-    <!-- Bootstrap + global scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="catalog.js" defer></script>
-    <script src="../../global-theme-toggle.js"></script>
-     <script src="../../js/unified-cart.js"></script>
-  </body>
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="enhanced-catalog.js" defer></script>
+<script src="../../js/unified-cart.js"></script>
+</body>
 </html>
