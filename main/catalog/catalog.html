@@ -23,10 +23,9 @@
     <link rel="stylesheet" href="../../global.css" />
     <link rel="stylesheet" href="catalog.css" />
   </head>
-<body class="d-flex flex-column min-vh-100">
-
-<!-- Header -->
-<header
+  <body class="d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <header
       class="d-flex justify-content-between align-items-center p-3 border-bottom bg-white shadow-sm"
     >
       <div class="d-flex align-items-center gap-2">
@@ -107,66 +106,79 @@
       </nav>
     </header>
 
-<!-- Main layout -->
-<main class="container-fluid my-5">
-    <div class="row">
-        <!-- Sidebar -->
-        <aside class="col-md-3 col-lg-2 mb-4 mb-md-0 bg-light p-4 rounded">
-            <h2 class="h5 text-danger mb-3">Explore</h2>
-            <nav>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link">Filters</a></li>
-                    <li><a href="#" class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link">Categories</a></li>
-                    <li><a href="#" class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link">Brands</a></li>
-                    <li><a href="#" class="d-block py-2 px-2 rounded text-dark text-decoration-none hover-link">New Arrivals</a></li>
-                </ul>
-            </nav>
-        </aside>
-
+    <!-- Main layout -->
+    <main class="container-fluid my-5">
+      <div class="row">
         <!-- Catalog -->
-        <section class="col-md-9 col-lg-10">
-            <!-- Filter Section -->
-            <div class="filter-section mb-4">
-                <div class="row g-3 align-items-end">
-                    <div class="col-md-4">
-                        <label for="product-search" class="form-label fw-semibold"><i class="fas fa-search me-1"></i>Search Products</label>
-                        <input type="text" id="product-search" class="form-control" placeholder="Search for products...">
-                    </div>
-                    <div class="col-md-3">
-                        <label for="categoryFilter" class="form-label fw-semibold"><i class="fas fa-filter me-1"></i>Category</label>
-                        <select id="categoryFilter" class="form-select">
-                            <option value="all">All Categories</option>
-                            <option value="audio">Audio</option>
-                            <option value="accessories">Accessories</option>
-                            <option value="wearables">Wearables</option>
-                            <option value="gaming">Gaming</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="priceFilter" class="form-label fw-semibold"><i class="fas fa-dollar-sign me-1"></i>Max Price</label>
-                        <input type="range" id="priceFilter" class="form-range" min="0" max="50000" value="50000">
-                        <div id="priceDisplay" class="text-muted small text-center">Max: 50,000 ₸</div>
-                    </div>
-                    <div class="col-md-2">
-                        <button id="resetFilters" class="btn btn-outline-secondary w-100 mb-2"><i class="fas fa-redo me-1"></i>Reset</button>
-                        <button id="sortProducts" class="btn btn-outline-primary w-100"><i class="fas fa-sort me-1"></i>Sort</button>
-                    </div>
+        <section class="col-lg-9 mx-auto">
+          <!-- Filter Section -->
+          <div class="filter-section mb-4">
+            <div class="row g-3 align-items-end">
+              <div class="col-md-4">
+                <label for="product-search" class="form-label fw-semibold"
+                  ><i class="fas fa-search me-1"></i>Search Products</label
+                >
+                <input
+                  type="text"
+                  id="product-search"
+                  class="form-control"
+                  placeholder="Search for products..."
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="categoryFilter" class="form-label fw-semibold"
+                  ><i class="fas fa-filter me-1"></i>Category</label
+                >
+                <select id="categoryFilter" class="form-select">
+                  <option value="all">All Categories</option>
+                  <option value="audio">Audio</option>
+                  <option value="accessories">Accessories</option>
+                  <option value="wearables">Wearables</option>
+                  <option value="gaming">Gaming</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="priceFilter" class="form-label fw-semibold"
+                  ><i class="fas fa-dollar-sign me-1"></i>Max Price</label
+                >
+                <input
+                  type="range"
+                  id="priceFilter"
+                  class="form-range"
+                  min="0"
+                  max="50000"
+                  value="50000"
+                />
+                <div id="priceDisplay" class="text-muted small text-center">
+                  Max: 50,000 ₸
                 </div>
+              </div>
+              <div class="col-md-2">
+                <button
+                  id="resetFilters"
+                  class="btn btn-outline-secondary w-100 mb-2"
+                >
+                  <i class="fas fa-redo me-1"></i>Reset
+                </button>
+                <button id="sortProducts" class="btn btn-outline-primary w-100">
+                  <i class="fas fa-sort me-1"></i>Sort
+                </button>
+              </div>
             </div>
+          </div>
 
-            <!-- Products Grid -->
-            <div class="row g-4" id="product-list"></div>
+          <!-- Products Grid -->
+          <div class="row g-4" id="product-list"></div>
         </section>
-    </div>
-</main>
+      </div>
+    </main>
 
-<footer class="footer text-center py-3 bg-body-tertiary mt-auto">
-    Yerkebulan Zhan, Danial Seit, Tassimov Arsen, Uzbekbay Abilkaiyr
-</footer>
+    <footer class="footer text-center py-3 bg-body-tertiary mt-auto">
+      Yerkebulan Zhan, Danial Seit, Tassimov Arsen, Uzbekbay Abilkaiyr
+    </footer>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="enhanced-catalog.js" defer></script>
-<script src="../../js/unified-cart.js"></script>
-</body>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="enhanced-catalog.js" defer></script>
+  </body>
 </html>

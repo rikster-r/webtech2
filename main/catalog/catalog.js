@@ -227,9 +227,4 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCardInteractions();
   setupNavigation();
   setupPageAnimation();
-
-  // Show welcome notification
-  setTimeout(() => {
-    showNotification('Welcome to Egoisty Catalog! 🛍️', 'success');
-  }, 500);
 });
