@@ -27,7 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
     addToCart(productId) {
       const product = this.products.find(p => p.id === productId);
       if (product && product.inStock) {
-        this.cart.push(product);
+        // Check if product already exists in cart
+        const existingItem = this.cart.find(item => item.id === productId);
+        
+        if (existingItem) {
+          // Increase quantity if item already exists
+          existingItem.quantity = (existingItem.quantity || 1) + 1;
+        } else {
+          // Add new item with quantity 1
+          const productCopy = {...product};
+          productCopy.quantity = 1;
+          this.cart.push(productCopy);
+        }
+        
         localStorage.setItem('cart', JSON.stringify(this.cart));
         this.updateCartCount();
         return true;
@@ -36,10 +48,19 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     
     updateCartCount() {
+      console.log(this.cart);
       const cartCountEl = document.getElementById('cartCount');
       if (cartCountEl) {
-        cartCountEl.textContent = this.cart.length;
+        // Calculate total items including quantities
+        const totalItems = this.cart.reduce((total, item) => total + (item.quantity || 1), 0);
+        cartCountEl.textContent = totalItems;
       }
+    },
+    
+    // New method to get cart item count for a specific product
+    getCartItemQuantity(productId) {
+      const item = this.cart.find(item => item.id === productId);
+      return item ? (item.quantity || 1) : 0;
     }
   };
 
@@ -127,17 +148,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const html = products.map(product => {
       const discount = product.price > 10000 ? `<span class="badge bg-danger position-absolute top-0 end-0 m-2">-10%</span>` : '';
       const discountPrice = product.price > 10000 ? `<br><small class="text-success">${Math.floor(product.price * 0.9).toLocaleString()} ₸</small>` : '';
+      const cartQuantity = catalogManager.getCartItemQuantity(product.id);
+      const quantityBadge = cartQuantity > 0 ? `<span class="badge bg-success position-absolute top-0 start-0 m-2">${cartQuantity} in cart</span>` : '';
       
       return `
         <div class="col-sm-6 col-md-4 col-lg-3 product-item product-card" data-product-id="${product.id}" data-product-name="${product.name.toLowerCase()}">
           <div class="card text-center p-3 shadow-sm h-100 position-relative" style="cursor: pointer; transition: all 0.3s ease;">
             ${discount}
+            ${quantityBadge}
             <div class="display-3 product-emoji" style="transition: transform 0.1s ease;">${product.emoji}</div>
             <h3 class="h6 mt-3 mb-1 product-name">${product.name}</h3>
             <p class="text-secondary mb-2">${product.price.toLocaleString()} ₸${discountPrice}</p>
             <div class="mb-2">${'★'.repeat(Math.floor(product.rating))}${'☆'.repeat(5 - Math.floor(product.rating))} <small class="text-muted">(${product.rating})</small></div>
             <div class="btn-group w-100" role="group">
-              <button type="button" class="btn btn-primary buy-btn" data-product-id="${product.id}" style="transition: transform 0.15s ease;">Buy</button>
               <button type="button" class="btn btn-outline-primary add-cart-button" data-product-id="${product.id}" style="transition: transform 0.15s ease;">Add to Cart</button>
             </div>
           </div>
@@ -239,7 +262,13 @@ document.addEventListener('DOMContentLoaded', () => {
         soundManager.playSound(700, 0.15);
         e.target.style.transform = 'scale(1.1)';
         setTimeout(() => e.target.style.transform = 'scale(1)', 125);
-        showNotification('Product added to cart!', 'success');
+        
+        const cartQuantity = catalogManager.getCartItemQuantity(id);
+        showNotification(`Product added to cart! (${cartQuantity} total)`, 'success');
+        
+        // Update the product card to show the new quantity
+        createProductCards();
+        
         const badge = document.getElementById('cartCount');
         if (badge) {
           badge.style.animation = 'none';
@@ -248,19 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
-
-  // Theme toggle
-  const themeToggle = document.getElementById('global-theme-toggle');
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-theme');
-      const icon = themeToggle.querySelector('i');
-      if (icon) {
-        icon.className = document.body.classList.contains('dark-theme') ? 'fas fa-sun' : 'fas fa-moon';
-      }
-      soundManager.playSound(500, 0.1);
-    });
-  }
 
   // Card hover effects
   document.addEventListener('mouseenter', (e) => {
