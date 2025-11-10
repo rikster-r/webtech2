@@ -132,29 +132,35 @@ class CartManager {
     this.cart.forEach((item, index) => {
       const quantity = item.quantity || 1;
       const itemTotal = item.price * quantity;
+      
+      // Use image if available, otherwise fall back to emoji
+      const imageContent = item.image 
+        ? `<div class="product-image-container" style="width: 80px; height: 80px; border-radius: 8px; overflow: hidden;">
+             <img src="${item.image}" 
+                  alt="${item.name}" 
+                  class="h-100 w-100 object-fit-cover"
+                  style="object-fit: cover;"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+             <div class="product-emoji-fallback h-100 w-100 d-none justify-content-center align-items-center" style="font-size: 2rem; background: #f8f9fa; display: flex !important;">${item.emoji || '📦'}</div>
+           </div>`
+        : `<div class="product-emoji" style="font-size: 3rem;">${item.emoji || '📦'}</div>`;
 
       const itemHTML = `
       <div class="cart-item border-bottom py-3" data-index="${index}">
         <div class="row align-items-center g-3 w-100">
           <div class="col-6 col-md-2 text-center">
-            <div class="product-emoji" style="font-size: 3rem;">${
-              item.emoji || '📦'
-            }</div>
+            ${imageContent}
           </div>
           <div class="col-6 col-md-3">
             <h5 class="mb-1 h6">${item.name}</h5>
-            <small class="text-muted text-capitalize">${
-              item.category || 'Product'
-            }</small><br>
-            ${
-              item.inStock
-                ? '<span class="badge bg-success mt-1">In Stock</span>'
-                : '<span class="badge bg-danger mt-1">Out of Stock</span>'
+            <small class="text-muted text-capitalize">${item.category || 'Product'}</small><br>
+            ${item.inStock
+              ? '<span class="badge bg-success mt-1">In Stock</span>'
+              : '<span class="badge bg-danger mt-1">Out of Stock</span>'
             }
-            ${
-              item.rating
-                ? `<div class="text-warning mt-1 small"><i class="fas fa-star"></i> ${item.rating}</div>`
-                : ''
+            ${item.rating
+              ? `<div class="text-warning mt-1 small"><i class="fas fa-star"></i> ${item.rating}</div>`
+              : ''
             }
           </div>
           <div class="col-6 col-md-2 text-center">
@@ -202,6 +208,21 @@ class CartManager {
 
     this.updateOrderSummary();
     this.attachItemEventListeners();
+    
+    // Add CSS for image styling if not already present
+    this.addCartStyles();
+  }
+
+  // Add CSS styles for cart images
+  addCartStyles() {
+    if (!document.getElementById('cart-styles')) {
+      const style = document.createElement('style');
+      style.id = 'cart-styles';
+      style.textContent = `
+        
+      `;
+      document.head.appendChild(style);
+    }
   }
 
   // Update order summary
@@ -247,13 +268,12 @@ class CartManager {
       </div>
 
       <div class="btn-group w-100 mt-4" role="group" aria-label="Cart actions">
-        ${
-          this.cart.length > 0
-            ? `
+        ${this.cart.length > 0
+          ? `
           <a href="../checkout.html" class="btn btn-primary py-3 px-4">Checkout</a>
           <button type="button" class="btn btn-danger py-3 px-4" id="clearCart">Clear Cart</button>
         `
-            : `
+          : `
           <button type="button" class="btn btn-secondary py-3 px-4" disabled>Checkout</button>
         `
         }
@@ -302,6 +322,13 @@ class CartManager {
           this.setQuantity(index, newQty);
         } else {
           e.currentTarget.value = this.cart[index].quantity || 1;
+        }
+      });
+      
+      // Prevent invalid input
+      input.addEventListener('keydown', (e) => {
+        if (e.key === '-' || e.key === 'e' || e.key === 'E') {
+          e.preventDefault();
         }
       });
     });

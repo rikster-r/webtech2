@@ -12,3 +12,33 @@ html.dark-theme .footer {
   background-color: #1e1e1e !important;
   color: #f1f1f1 !important;
 }
+
+.product-image-container {
+  position: relative;
+  margin: 0 auto;
+}
+.product-emoji-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+}
+.cart-item {
+  transition: all 0.3s ease;
+}
+.cart-item:hover {
+  background-color: #f8f9fa;
+}
+html.dark-theme .cart-item:hover {
+  background-color: #2a2a2a;
+}
+.quantity-input {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
